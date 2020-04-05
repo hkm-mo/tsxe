@@ -5,7 +5,7 @@ Create HTML elements by TSX/JSX syntax without React.
 ## Install
 
 ```sh
-$ npm install tsxe --save-dev
+$ npm install tsxe
 ```
 
 ## Setup
