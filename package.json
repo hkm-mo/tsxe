@@ -1,7 +1,7 @@
 {
     "name": "tsxe",
     "version": "0.1.0",
-    "description": "Create HTML elements by tsx/jsx syntax.",
+    "description": "Create HTML elements by TSX/JSX syntax without React.",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "files": [
