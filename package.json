@@ -1,0 +1,38 @@
+{
+    "name": "tsxe",
+    "version": "0.1.0",
+    "description": "Create HTML elements by tsx/jsx syntax.",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "files": [
+        "dist",
+        "global.d.ts"
+    ],
+    "dependencies": {
+        "csstype": "^2.6.10"
+    },
+    "devDependencies": {
+        "typescript": "^3.8.3"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/hkm-mo/tsxe.git"
+    },
+    "keywords": [
+        "tsx",
+        "jsx",
+        "without React",
+        "template",
+        "HTML",
+        "DOM"
+    ],
+    "author": "hkm-mo",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/hkm-mo/tsxe/issues"
+    },
+    "homepage": "https://github.com/hkm-mo/tsxe#readme"
+}
