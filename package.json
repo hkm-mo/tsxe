@@ -5,8 +5,11 @@
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "files": [
-        "dist",
-        "global.d.ts"
+        "dist/index.d.ts",
+        "dist/index.js",
+        "global.d.ts",
+        "LICENSE",
+        "README.md"
     ],
     "dependencies": {
         "csstype": "^2.6.10"
