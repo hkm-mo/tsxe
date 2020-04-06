@@ -9,16 +9,16 @@ import * as CSS from 'csstype';
 
 type Booleanish = boolean | 'true' | 'false';
 type NativeWheelEvent = WheelEvent;
-
+type LiteralUnion<T extends U, U = string> = T | (U & {});
 
 type EventHandler<K extends keyof HTMLElementEventMap> = (this: HTMLElement, ev: HTMLElementEventMap[K]) => any;
 
 declare global {
     namespace JSX {
         type Element = HTMLElement;
-    
+
         type DetailedHTMLProps<E extends HTMLAttributes<T>, T> = E;
-    
+
         //HTMLElementTagNameMap
         interface IntrinsicElements {
             "a": DetailedHTMLProps<AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>;
@@ -137,7 +137,7 @@ declare global {
             "video": DetailedHTMLProps<VideoHTMLAttributes<HTMLVideoElement>, HTMLVideoElement>;
             "wbr": DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>;
         }
-    
+
         interface DOMAttributes<T> {
             // Clipboard Events
             onCopy?: EventHandler<"copy">;
@@ -146,13 +146,13 @@ declare global {
             onCutCapture?: EventHandler<"cut">;
             onPaste?: EventHandler<"paste">;
             onPasteCapture?: EventHandler<"paste">;
-    
+
             // Focus Events
             onFocus?: EventHandler<"focus">;
             onFocusCapture?: EventHandler<"focus">;
             onBlur?: EventHandler<"blur">;
             onBlurCapture?: EventHandler<"blur">;
-    
+
             // Form Events
             onChange?: EventHandler<"change">;
             onChangeCapture?: EventHandler<"change">;
@@ -166,13 +166,13 @@ declare global {
             onSubmitCapture?: EventHandler<"submit">;
             onInvalid?: EventHandler<"invalid">;
             onInvalidCapture?: EventHandler<"invalid">;
-    
+
             // Image Events
             onLoad?: EventHandler<"load">;
             onLoadCapture?: EventHandler<"load">;
             onError?: EventHandler<"error">; // also a Media Event
             onErrorCapture?: EventHandler<"error">; // also a Media Event
-    
+
             // Keyboard Events
             onKeyDown?: EventHandler<"keydown">;
             onKeyDownCapture?: EventHandler<"keydown">;
@@ -180,7 +180,7 @@ declare global {
             onKeyPressCapture?: EventHandler<"keypress">;
             onKeyUp?: EventHandler<"keyup">;
             onKeyUpCapture?: EventHandler<"keyup">;
-    
+
             // Media Events
             onAbort?: EventHandler<"abort">;
             onAbortCapture?: EventHandler<"abort">;
@@ -224,7 +224,7 @@ declare global {
             onVolumeChangeCapture?: EventHandler<"volumechange">;
             onWaiting?: EventHandler<"waiting">;
             onWaitingCapture?: EventHandler<"waiting">;
-    
+
             // MouseEvents
             onAuxClick?: EventHandler<"auxclick">;
             onAuxClickCapture?: EventHandler<"auxclick">;
@@ -262,11 +262,11 @@ declare global {
             onMouseOverCapture?: EventHandler<"mouseover">;
             onMouseUp?: EventHandler<"mouseup">;
             onMouseUpCapture?: EventHandler<"mouseup">;
-    
+
             // Selection Events
             onSelect?: EventHandler<"select">;
             onSelectCapture?: EventHandler<"select">;
-    
+
             // Touch Events
             onTouchCancel?: EventHandler<"touchcancel">;
             onTouchCancelCapture?: EventHandler<"touchcancel">;
@@ -276,7 +276,7 @@ declare global {
             onTouchMoveCapture?: EventHandler<"touchmove">;
             onTouchStart?: EventHandler<"touchstart">;
             onTouchStartCapture?: EventHandler<"touchstart">;
-    
+
             // Pointer Events
             onPointerDown?: EventHandler<"pointerdown">;
             onPointerDownCapture?: EventHandler<"pointerdown">;
@@ -298,15 +298,15 @@ declare global {
             onGotPointerCaptureCapture?: EventHandler<"gotpointercapture">;
             onLostPointerCapture?: EventHandler<"lostpointercapture">;
             onLostPointerCaptureCapture?: EventHandler<"lostpointercapture">;
-    
+
             // UI Events
             onScroll?: EventHandler<"scroll">;
             onScrollCapture?: EventHandler<"scroll">;
-    
+
             // Wheel Events
             onWheel?: EventHandler<"wheel">;
             onWheelCapture?: EventHandler<"wheel">;
-    
+
             // Animation Events
             onAnimationStart?: EventHandler<"animationstart">;
             onAnimationStartCapture?: EventHandler<"animationstart">;
@@ -314,12 +314,12 @@ declare global {
             onAnimationEndCapture?: EventHandler<"animationend">;
             onAnimationIteration?: EventHandler<"animationiteration">;
             onAnimationIterationCapture?: EventHandler<"animationiteration">;
-    
+
             // Transition Events
             onTransitionEnd?: EventHandler<"transitionend">;
             onTransitionEndCapture?: EventHandler<"transitionend">;
         }
-    
+
         export interface CSSProperties extends CSS.Properties<string | number> {
             /**
              * The index signature was removed to enable closed typing for style
@@ -330,8 +330,8 @@ declare global {
              * https://github.com/frenic/csstype#what-should-i-do-when-i-get-type-errors
              */
         }
-    
-    
+
+
         interface HTMLAttributes<T> extends AriaAttributes, DOMAttributes<T> {
             // Standard HTML Attributes
             accessKey?: string;
@@ -350,13 +350,13 @@ declare global {
             tabIndex?: number;
             title?: string;
             translate?: 'yes' | 'no';
-    
+
             // Unknown
             radioGroup?: string; // <command>, <menuitem>
-    
+
             // WAI-ARIA
             role?: string;
-    
+
             // RDFa Attributes
             about?: string;
             datatype?: string;
@@ -366,7 +366,7 @@ declare global {
             resource?: string;
             typeof?: string;
             vocab?: string;
-    
+
             // Non-standard Attributes
             autoCapitalize?: string;
             autoCorrect?: string;
@@ -380,7 +380,7 @@ declare global {
             results?: number;
             security?: string;
             unselectable?: 'on' | 'off';
-    
+
             // Living Standard
             /**
              * Hints at the type of data that might be entered by the user while editing the element or its contents
@@ -393,7 +393,7 @@ declare global {
              */
             is?: string;
         }
-    
+
         interface AllHTMLAttributes<T> extends HTMLAttributes<T> {
             // Standard HTML Attributes
             accept?: string;
@@ -503,7 +503,7 @@ declare global {
             wmode?: string;
             wrap?: string;
         }
-    
+
         interface AnchorHTMLAttributes<T> extends HTMLAttributes<T> {
             download?: any;
             href?: string;
@@ -515,10 +515,10 @@ declare global {
             type?: string;
             referrerPolicy?: string;
         }
-    
+
         // tslint:disable-next-line:no-empty-interface
         interface AudioHTMLAttributes<T> extends MediaHTMLAttributes<T> { }
-    
+
         interface AreaHTMLAttributes<T> extends HTMLAttributes<T> {
             alt?: string;
             coords?: string;
@@ -530,16 +530,16 @@ declare global {
             shape?: string;
             target?: string;
         }
-    
+
         interface BaseHTMLAttributes<T> extends HTMLAttributes<T> {
             href?: string;
             target?: string;
         }
-    
+
         interface BlockquoteHTMLAttributes<T> extends HTMLAttributes<T> {
             cite?: string;
         }
-    
+
         interface ButtonHTMLAttributes<T> extends HTMLAttributes<T> {
             autoFocus?: boolean;
             disabled?: boolean;
@@ -553,57 +553,57 @@ declare global {
             type?: 'submit' | 'reset' | 'button';
             value?: string | string[] | number;
         }
-    
+
         interface CanvasHTMLAttributes<T> extends HTMLAttributes<T> {
             height?: number | string;
             width?: number | string;
         }
-    
+
         interface ColHTMLAttributes<T> extends HTMLAttributes<T> {
             span?: number;
             width?: number | string;
         }
-    
+
         interface ColgroupHTMLAttributes<T> extends HTMLAttributes<T> {
             span?: number;
         }
-    
+
         interface DataHTMLAttributes<T> extends HTMLAttributes<T> {
             value?: string | string[] | number;
         }
-    
+
         interface DetailsHTMLAttributes<T> extends HTMLAttributes<T> {
             open?: boolean;
         }
-    
+
         interface DelHTMLAttributes<T> extends HTMLAttributes<T> {
             cite?: string;
             dateTime?: string;
         }
-    
+
         interface DialogHTMLAttributes<T> extends HTMLAttributes<T> {
             open?: boolean;
         }
-    
+
         interface EmbedHTMLAttributes<T> extends HTMLAttributes<T> {
             height?: number | string;
             src?: string;
             type?: string;
             width?: number | string;
         }
-    
+
         interface FontHTMLAttributes<T> extends HTMLAttributes<T> {
             disabled?: boolean;
             form?: string;
             name?: string;
         }
-    
+
         interface FieldsetHTMLAttributes<T> extends HTMLAttributes<T> {
             disabled?: boolean;
             form?: string;
             name?: string;
         }
-    
+
         interface FormHTMLAttributes<T> extends HTMLAttributes<T> {
             acceptCharset?: string;
             action?: string;
@@ -614,11 +614,11 @@ declare global {
             noValidate?: boolean;
             target?: string;
         }
-    
+
         interface HtmlHTMLAttributes<T> extends HTMLAttributes<T> {
             manifest?: string;
         }
-    
+
         interface IframeHTMLAttributes<T> extends HTMLAttributes<T> {
             allow?: string;
             allowFullScreen?: boolean;
@@ -636,7 +636,7 @@ declare global {
             srcDoc?: string;
             width?: number | string;
         }
-    
+
         interface ImgHTMLAttributes<T> extends HTMLAttributes<T> {
             alt?: string;
             crossOrigin?: "anonymous" | "use-credentials" | "";
@@ -650,12 +650,12 @@ declare global {
             useMap?: string;
             width?: number | string;
         }
-    
+
         interface InsHTMLAttributes<T> extends HTMLAttributes<T> {
             cite?: string;
             dateTime?: string;
         }
-    
+
         interface InputHTMLAttributes<T> extends HTMLAttributes<T> {
             accept?: string;
             alt?: string;
@@ -686,11 +686,13 @@ declare global {
             size?: number;
             src?: string;
             step?: number | string;
-            type?: string;
+            type?: LiteralUnion<"button" | "checkbox" | "color" | "date" | "datetime-local" | "email" | "file" |
+            "hidden" | "image" | "month" | "number" | "password" | "radio" | "range" | "reset" | "search" |
+            "submit" | "tel" | "text" | "time" | "url" | "week" | "datetime">;
             value?: string | string[] | number;
             width?: number | string;
         }
-    
+
         interface KeygenHTMLAttributes<T> extends HTMLAttributes<T> {
             autoFocus?: boolean;
             challenge?: string;
@@ -700,16 +702,16 @@ declare global {
             keyParams?: string;
             name?: string;
         }
-    
+
         interface LabelHTMLAttributes<T> extends HTMLAttributes<T> {
             form?: string;
             for?: string;
         }
-    
+
         interface LiHTMLAttributes<T> extends HTMLAttributes<T> {
             value?: string | string[] | number;
         }
-    
+
         interface LinkHTMLAttributes<T> extends HTMLAttributes<T> {
             as?: string;
             crossOrigin?: string;
@@ -721,15 +723,15 @@ declare global {
             sizes?: string;
             type?: string;
         }
-    
+
         interface MapHTMLAttributes<T> extends HTMLAttributes<T> {
             name?: string;
         }
-    
+
         interface MenuHTMLAttributes<T> extends HTMLAttributes<T> {
             type?: string;
         }
-    
+
         interface MediaHTMLAttributes<T> extends HTMLAttributes<T> {
             autoPlay?: boolean;
             controls?: boolean;
@@ -742,14 +744,14 @@ declare global {
             preload?: string;
             src?: string;
         }
-    
+
         interface MetaHTMLAttributes<T> extends HTMLAttributes<T> {
             charSet?: string;
             content?: string;
             httpEquiv?: string;
             name?: string;
         }
-    
+
         interface MeterHTMLAttributes<T> extends HTMLAttributes<T> {
             form?: string;
             high?: number;
@@ -759,11 +761,11 @@ declare global {
             optimum?: number;
             value?: string | string[] | number;
         }
-    
+
         interface QuoteHTMLAttributes<T> extends HTMLAttributes<T> {
             cite?: string;
         }
-    
+
         interface ObjectHTMLAttributes<T> extends HTMLAttributes<T> {
             classID?: string;
             data?: string;
@@ -775,41 +777,41 @@ declare global {
             width?: number | string;
             wmode?: string;
         }
-    
+
         interface OlHTMLAttributes<T> extends HTMLAttributes<T> {
             reversed?: boolean;
             start?: number;
             type?: '1' | 'a' | 'A' | 'i' | 'I';
         }
-    
+
         interface OptgroupHTMLAttributes<T> extends HTMLAttributes<T> {
             disabled?: boolean;
             label?: string;
         }
-    
+
         interface OptionHTMLAttributes<T> extends HTMLAttributes<T> {
             disabled?: boolean;
             label?: string;
             selected?: boolean;
             value?: string | string[] | number;
         }
-    
+
         interface OutputHTMLAttributes<T> extends HTMLAttributes<T> {
             form?: string;
             for?: string;
             name?: string;
         }
-    
+
         interface ParamHTMLAttributes<T> extends HTMLAttributes<T> {
             name?: string;
             value?: string | string[] | number;
         }
-    
+
         interface ProgressHTMLAttributes<T> extends HTMLAttributes<T> {
             max?: number | string;
             value?: string | string[] | number;
         }
-    
+
         interface ScriptHTMLAttributes<T> extends HTMLAttributes<T> {
             async?: boolean;
             charSet?: string;
@@ -821,7 +823,7 @@ declare global {
             src?: string;
             type?: string;
         }
-    
+
         interface SelectHTMLAttributes<T> extends HTMLAttributes<T> {
             autoComplete?: string;
             autoFocus?: boolean;
@@ -833,7 +835,7 @@ declare global {
             size?: number;
             value?: string | string[] | number;
         }
-    
+
         interface SourceHTMLAttributes<T> extends HTMLAttributes<T> {
             media?: string;
             sizes?: string;
@@ -841,20 +843,20 @@ declare global {
             srcSet?: string;
             type?: string;
         }
-    
+
         interface StyleHTMLAttributes<T> extends HTMLAttributes<T> {
             media?: string;
             nonce?: string;
             scoped?: boolean;
             type?: string;
         }
-    
+
         interface TableHTMLAttributes<T> extends HTMLAttributes<T> {
             cellPadding?: number | string;
             cellSpacing?: number | string;
             summary?: string;
         }
-    
+
         interface TextareaHTMLAttributes<T> extends HTMLAttributes<T> {
             autoComplete?: string;
             autoFocus?: boolean;
@@ -872,7 +874,7 @@ declare global {
             value?: string | string[] | number;
             wrap?: string;
         }
-    
+
         interface TdHTMLAttributes<T> extends HTMLAttributes<T> {
             align?: "left" | "center" | "right" | "justify" | "char";
             colSpan?: number;
@@ -882,7 +884,7 @@ declare global {
             abbr?: string;
             valign?: "top" | "middle" | "bottom" | "baseline";
         }
-    
+
         interface ThHTMLAttributes<T> extends HTMLAttributes<T> {
             align?: "left" | "center" | "right" | "justify" | "char";
             colSpan?: number;
@@ -891,11 +893,11 @@ declare global {
             scope?: string;
             abbr?: string;
         }
-    
+
         interface TimeHTMLAttributes<T> extends HTMLAttributes<T> {
             dateTime?: string;
         }
-    
+
         interface TrackHTMLAttributes<T> extends HTMLAttributes<T> {
             default?: boolean;
             kind?: string;
@@ -903,7 +905,7 @@ declare global {
             src?: string;
             srcLang?: string;
         }
-    
+
         interface VideoHTMLAttributes<T> extends MediaHTMLAttributes<T> {
             height?: number | string;
             playsInline?: boolean;
@@ -911,7 +913,7 @@ declare global {
             width?: number | string;
             disablePictureInPicture?: boolean;
         }
-    
+
         // All the WAI-ARIA 1.1 attributes from https://www.w3.org/TR/wai-aria-1.1/
         interface AriaAttributes {
             /** Identifies the currently active element when DOM focus is on a composite widget, textbox, group, or application. */
