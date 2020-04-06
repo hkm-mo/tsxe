@@ -1,3 +1,9 @@
+/**
+ * @author hkm-mo
+ * @see {@link https://github.com/hkm-mo/tsxe|GitHub}
+ * @license MIT
+ */
+
 import * as CSS from 'csstype';
 
 

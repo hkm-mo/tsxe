@@ -1,5 +1,11 @@
 /// <reference path="../global.d.ts" />
 
+/**
+ * @author hkm-mo
+ * @see {@link https://github.com/hkm-mo/tsxe|GitHub}
+ * @license MIT
+ */
+
 const eventAttr = /^on([A-Z][a-zA-Z]*?)(Capture)?$/;
 
 // non recursive flatten deep using a stack
