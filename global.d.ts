@@ -1,4 +1,7 @@
 /**
+ * Code was modified based on https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/react/index.d.ts
+ * which licensed under the MIT license (https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/master/LICENSE)
+ * 
  * @author hkm-mo
  * @see {@link https://github.com/hkm-mo/tsxe|GitHub}
  * @license MIT
