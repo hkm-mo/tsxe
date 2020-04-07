@@ -4,12 +4,13 @@
  * @license MIT
  */
 
-import * as CSS from 'csstype';
+import * as CSS from "csstype";
 
 
-type Booleanish = boolean | 'true' | 'false';
+type Booleanish = boolean | "true" | "false";
 type NativeWheelEvent = WheelEvent;
 type LiteralUnion<T extends U, U = string> = T | (U & {});
+type AttrTarget = LiteralUnion<"_self" | "_blank" | "_parent" | "_top">;
 
 type EventHandler<K extends keyof HTMLElementEventMap> = (this: HTMLElement, ev: HTMLElementEventMap[K]) => any;
 
@@ -338,7 +339,7 @@ declare global {
             class?: string;
             contentEditable?: Booleanish | "inherit";
             contextMenu?: string;
-            dir?: string;
+            dir?: LiteralUnion<"ltr" | "rtl" | "auto">;
             draggable?: Booleanish;
             hidden?: boolean;
             id?: string;
@@ -349,7 +350,7 @@ declare global {
             style?: CSSProperties | string;
             tabIndex?: number;
             title?: string;
-            translate?: 'yes' | 'no';
+            translate?: "yes" | "no";
 
             // Unknown
             radioGroup?: string; // <command>, <menuitem>
@@ -368,8 +369,8 @@ declare global {
             vocab?: string;
 
             // Non-standard Attributes
-            autoCapitalize?: string;
-            autoCorrect?: string;
+            autoCapitalize?: LiteralUnion<"off" | "none" | "on" | "sentences" | "words" | "characters">;
+            autoCorrect?: LiteralUnion<"off" | "on">;
             autoSave?: string;
             color?: string;
             itemProp?: string;
@@ -379,14 +380,13 @@ declare global {
             itemRef?: string;
             results?: number;
             security?: string;
-            unselectable?: 'on' | 'off';
 
             // Living Standard
             /**
              * Hints at the type of data that might be entered by the user while editing the element or its contents
              * @see https://html.spec.whatwg.org/multipage/interaction.html#input-modalities:-the-inputmode-attribute
              */
-            inputMode?: 'none' | 'text' | 'tel' | 'url' | 'email' | 'numeric' | 'decimal' | 'search';
+            inputMode?: "none" | "text" | "tel" | "url" | "email" | "numeric" | "decimal" | "search";
             /**
              * Specify that a standard HTML element should behave like a defined custom built-in element
              * @see https://html.spec.whatwg.org/multipage/custom-elements.html#attr-is
@@ -495,7 +495,7 @@ declare global {
             start?: number;
             step?: number | string;
             summary?: string;
-            target?: string;
+            target?: AttrTarget;
             type?: string;
             useMap?: string;
             value?: string | string[] | number;
@@ -505,13 +505,13 @@ declare global {
         }
 
         interface AnchorHTMLAttributes<T> extends HTMLAttributes<T> {
-            download?: any;
+            download?: boolean | string;
             href?: string;
             hrefLang?: string;
             media?: string;
             ping?: string;
             rel?: string;
-            target?: string;
+            target?: AttrTarget;
             type?: string;
             referrerPolicy?: string;
         }
@@ -522,18 +522,18 @@ declare global {
         interface AreaHTMLAttributes<T> extends HTMLAttributes<T> {
             alt?: string;
             coords?: string;
-            download?: any;
+            download?: boolean | string;
             href?: string;
             hrefLang?: string;
             media?: string;
             rel?: string;
-            shape?: string;
-            target?: string;
+            shape?: LiteralUnion<"circle" | "rect" | "poly" | "default">;
+            target?: AttrTarget;
         }
 
         interface BaseHTMLAttributes<T> extends HTMLAttributes<T> {
             href?: string;
-            target?: string;
+            target?: AttrTarget;
         }
 
         interface BlockquoteHTMLAttributes<T> extends HTMLAttributes<T> {
@@ -550,7 +550,7 @@ declare global {
             formNoValidate?: boolean;
             formTarget?: string;
             name?: string;
-            type?: 'submit' | 'reset' | 'button';
+            type?: "submit" | "reset" | "button";
             value?: string | string[] | number;
         }
 
@@ -607,12 +607,12 @@ declare global {
         interface FormHTMLAttributes<T> extends HTMLAttributes<T> {
             acceptCharset?: string;
             action?: string;
-            autoComplete?: string;
-            encType?: string;
-            method?: string;
+            autoComplete?: LiteralUnion<"off" | "on">;
+            encType?: LiteralUnion<"application/x-www-form-urlencoded" | "multipart/form-data" | "text/plain">;
+            method?: LiteralUnion<"post" | "get" | "dialog">;
             name?: string;
             noValidate?: boolean;
-            target?: string;
+            target?: AttrTarget;
         }
 
         interface HtmlHTMLAttributes<T> extends HTMLAttributes<T> {
@@ -659,7 +659,7 @@ declare global {
         interface InputHTMLAttributes<T> extends HTMLAttributes<T> {
             accept?: string;
             alt?: string;
-            autoComplete?: string;
+            autoComplete?: LiteralUnion<"off" | "on">;
             autoFocus?: boolean;
             capture?: boolean | string; // https://www.w3.org/TR/html-media-capture/#the-capture-attribute
             checked?: boolean;
@@ -781,7 +781,7 @@ declare global {
         interface OlHTMLAttributes<T> extends HTMLAttributes<T> {
             reversed?: boolean;
             start?: number;
-            type?: '1' | 'a' | 'A' | 'i' | 'I';
+            type?: "1" | "a" | "A" | "i" | "I";
         }
 
         interface OptgroupHTMLAttributes<T> extends HTMLAttributes<T> {
@@ -825,7 +825,7 @@ declare global {
         }
 
         interface SelectHTMLAttributes<T> extends HTMLAttributes<T> {
-            autoComplete?: string;
+            autoComplete?: LiteralUnion<"off" | "on">;
             autoFocus?: boolean;
             disabled?: boolean;
             form?: string;
@@ -858,7 +858,7 @@ declare global {
         }
 
         interface TextareaHTMLAttributes<T> extends HTMLAttributes<T> {
-            autoComplete?: string;
+            autoComplete?: LiteralUnion<"off" | "on">;
             autoFocus?: boolean;
             cols?: number;
             dirName?: string;
@@ -917,189 +917,189 @@ declare global {
         // All the WAI-ARIA 1.1 attributes from https://www.w3.org/TR/wai-aria-1.1/
         interface AriaAttributes {
             /** Identifies the currently active element when DOM focus is on a composite widget, textbox, group, or application. */
-            'aria-activedescendant'?: string;
+            "aria-activedescendant"?: string;
             /** Indicates whether assistive technologies will present all, or only parts of, the changed region based on the change notifications defined by the aria-relevant attribute. */
-            'aria-atomic'?: boolean | 'false' | 'true';
+            "aria-atomic"?: boolean | "false" | "true";
             /**
-             * Indicates whether inputting text could trigger display of one or more predictions of the user's intended value for an input and specifies how predictions would be
+             * Indicates whether inputting text could trigger display of one or more predictions of the user"s intended value for an input and specifies how predictions would be
              * presented if they are made.
              */
-            'aria-autocomplete'?: 'none' | 'inline' | 'list' | 'both';
+            "aria-autocomplete"?: "none" | "inline" | "list" | "both";
             /** Indicates an element is being modified and that assistive technologies MAY want to wait until the modifications are complete before exposing them to the user. */
-            'aria-busy'?: boolean | 'false' | 'true';
+            "aria-busy"?: boolean | "false" | "true";
             /**
              * Indicates the current "checked" state of checkboxes, radio buttons, and other widgets.
              * @see aria-pressed @see aria-selected.
              */
-            'aria-checked'?: boolean | 'false' | 'mixed' | 'true';
+            "aria-checked"?: boolean | "false" | "mixed" | "true";
             /**
              * Defines the total number of columns in a table, grid, or treegrid.
              * @see aria-colindex.
              */
-            'aria-colcount'?: number;
+            "aria-colcount"?: number;
             /**
              * Defines an element's column index or position with respect to the total number of columns within a table, grid, or treegrid.
              * @see aria-colcount @see aria-colspan.
              */
-            'aria-colindex'?: number;
+            "aria-colindex"?: number;
             /**
              * Defines the number of columns spanned by a cell or gridcell within a table, grid, or treegrid.
              * @see aria-colindex @see aria-rowspan.
              */
-            'aria-colspan'?: number;
+            "aria-colspan"?: number;
             /**
              * Identifies the element (or elements) whose contents or presence are controlled by the current element.
              * @see aria-owns.
              */
-            'aria-controls'?: string;
+            "aria-controls"?: string;
             /** Indicates the element that represents the current item within a container or set of related elements. */
-            'aria-current'?: boolean | 'false' | 'true' | 'page' | 'step' | 'location' | 'date' | 'time';
+            "aria-current"?: boolean | "false" | "true" | "page" | "step" | "location" | "date" | "time";
             /**
              * Identifies the element (or elements) that describes the object.
              * @see aria-labelledby
              */
-            'aria-describedby'?: string;
+            "aria-describedby"?: string;
             /**
              * Identifies the element that provides a detailed, extended description for the object.
              * @see aria-describedby.
              */
-            'aria-details'?: string;
+            "aria-details"?: string;
             /**
              * Indicates that the element is perceivable but disabled, so it is not editable or otherwise operable.
              * @see aria-hidden @see aria-readonly.
              */
-            'aria-disabled'?: boolean | 'false' | 'true';
+            "aria-disabled"?: boolean | "false" | "true";
             /**
              * Indicates what functions can be performed when a dragged object is released on the drop target.
              * @deprecated in ARIA 1.1
              */
-            'aria-dropeffect'?: 'none' | 'copy' | 'execute' | 'link' | 'move' | 'popup';
+            "aria-dropeffect"?: "none" | "copy" | "execute" | "link" | "move" | "popup";
             /**
              * Identifies the element that provides an error message for the object.
              * @see aria-invalid @see aria-describedby.
              */
-            'aria-errormessage'?: string;
+            "aria-errormessage"?: string;
             /** Indicates whether the element, or another grouping element it controls, is currently expanded or collapsed. */
-            'aria-expanded'?: boolean | 'false' | 'true';
+            "aria-expanded"?: boolean | "false" | "true";
             /**
-             * Identifies the next element (or elements) in an alternate reading order of content which, at the user's discretion,
+             * Identifies the next element (or elements) in an alternate reading order of content which, at the user"s discretion,
              * allows assistive technology to override the general default of reading in document source order.
              */
-            'aria-flowto'?: string;
+            "aria-flowto"?: string;
             /**
              * Indicates an element's "grabbed" state in a drag-and-drop operation.
              * @deprecated in ARIA 1.1
              */
-            'aria-grabbed'?: boolean | 'false' | 'true';
+            "aria-grabbed"?: boolean | "false" | "true";
             /** Indicates the availability and type of interactive popup element, such as menu or dialog, that can be triggered by an element. */
-            'aria-haspopup'?: boolean | 'false' | 'true' | 'menu' | 'listbox' | 'tree' | 'grid' | 'dialog';
+            "aria-haspopup"?: boolean | "false" | "true" | "menu" | "listbox" | "tree" | "grid" | "dialog";
             /**
              * Indicates whether the element is exposed to an accessibility API.
              * @see aria-disabled.
              */
-            'aria-hidden'?: boolean | 'false' | 'true';
+            "aria-hidden"?: boolean | "false" | "true";
             /**
              * Indicates the entered value does not conform to the format expected by the application.
              * @see aria-errormessage.
              */
-            'aria-invalid'?: boolean | 'false' | 'true' | 'grammar' | 'spelling';
+            "aria-invalid"?: boolean | "false" | "true" | "grammar" | "spelling";
             /** Indicates keyboard shortcuts that an author has implemented to activate or give focus to an element. */
-            'aria-keyshortcuts'?: string;
+            "aria-keyshortcuts"?: string;
             /**
              * Defines a string value that labels the current element.
              * @see aria-labelledby.
              */
-            'aria-label'?: string;
+            "aria-label"?: string;
             /**
              * Identifies the element (or elements) that labels the current element.
              * @see aria-describedby.
              */
-            'aria-labelledby'?: string;
+            "aria-labelledby"?: string;
             /** Defines the hierarchical level of an element within a structure. */
-            'aria-level'?: number;
+            "aria-level"?: number;
             /** Indicates that an element will be updated, and describes the types of updates the user agents, assistive technologies, and user can expect from the live region. */
-            'aria-live'?: 'off' | 'assertive' | 'polite';
+            "aria-live"?: "off" | "assertive" | "polite";
             /** Indicates whether an element is modal when displayed. */
-            'aria-modal'?: boolean | 'false' | 'true';
+            "aria-modal"?: boolean | "false" | "true";
             /** Indicates whether a text box accepts multiple lines of input or only a single line. */
-            'aria-multiline'?: boolean | 'false' | 'true';
+            "aria-multiline"?: boolean | "false" | "true";
             /** Indicates that the user may select more than one item from the current selectable descendants. */
-            'aria-multiselectable'?: boolean | 'false' | 'true';
+            "aria-multiselectable"?: boolean | "false" | "true";
             /** Indicates whether the element's orientation is horizontal, vertical, or unknown/ambiguous. */
-            'aria-orientation'?: 'horizontal' | 'vertical';
+            "aria-orientation"?: "horizontal" | "vertical";
             /**
              * Identifies an element (or elements) in order to define a visual, functional, or contextual parent/child relationship
              * between DOM elements where the DOM hierarchy cannot be used to represent the relationship.
              * @see aria-controls.
              */
-            'aria-owns'?: string;
+            "aria-owns"?: string;
             /**
              * Defines a short hint (a word or short phrase) intended to aid the user with data entry when the control has no value.
              * A hint could be a sample value or a brief description of the expected format.
              */
-            'aria-placeholder'?: string;
+            "aria-placeholder"?: string;
             /**
              * Defines an element's number or position in the current set of listitems or treeitems. Not required if all elements in the set are present in the DOM.
              * @see aria-setsize.
              */
-            'aria-posinset'?: number;
+            "aria-posinset"?: number;
             /**
              * Indicates the current "pressed" state of toggle buttons.
              * @see aria-checked @see aria-selected.
              */
-            'aria-pressed'?: boolean | 'false' | 'mixed' | 'true';
+            "aria-pressed"?: boolean | "false" | "mixed" | "true";
             /**
              * Indicates that the element is not editable, but is otherwise operable.
              * @see aria-disabled.
              */
-            'aria-readonly'?: boolean | 'false' | 'true';
+            "aria-readonly"?: boolean | "false" | "true";
             /**
              * Indicates what notifications the user agent will trigger when the accessibility tree within a live region is modified.
              * @see aria-atomic.
              */
-            'aria-relevant'?: 'additions' | 'additions text' | 'all' | 'removals' | 'text';
+            "aria-relevant"?: "additions" | "additions text" | "all" | "removals" | "text";
             /** Indicates that user input is required on the element before a form may be submitted. */
-            'aria-required'?: boolean | 'false' | 'true';
+            "aria-required"?: boolean | "false" | "true";
             /** Defines a human-readable, author-localized description for the role of an element. */
-            'aria-roledescription'?: string;
+            "aria-roledescription"?: string;
             /**
              * Defines the total number of rows in a table, grid, or treegrid.
              * @see aria-rowindex.
              */
-            'aria-rowcount'?: number;
+            "aria-rowcount"?: number;
             /**
              * Defines an element's row index or position with respect to the total number of rows within a table, grid, or treegrid.
              * @see aria-rowcount @see aria-rowspan.
              */
-            'aria-rowindex'?: number;
+            "aria-rowindex"?: number;
             /**
              * Defines the number of rows spanned by a cell or gridcell within a table, grid, or treegrid.
              * @see aria-rowindex @see aria-colspan.
              */
-            'aria-rowspan'?: number;
+            "aria-rowspan"?: number;
             /**
              * Indicates the current "selected" state of various widgets.
              * @see aria-checked @see aria-pressed.
              */
-            'aria-selected'?: boolean | 'false' | 'true';
+            "aria-selected"?: boolean | "false" | "true";
             /**
              * Defines the number of items in the current set of listitems or treeitems. Not required if all elements in the set are present in the DOM.
              * @see aria-posinset.
              */
-            'aria-setsize'?: number;
+            "aria-setsize"?: number;
             /** Indicates if items in a table or grid are sorted in ascending or descending order. */
-            'aria-sort'?: 'none' | 'ascending' | 'descending' | 'other';
+            "aria-sort"?: "none" | "ascending" | "descending" | "other";
             /** Defines the maximum allowed value for a range widget. */
-            'aria-valuemax'?: number;
+            "aria-valuemax"?: number;
             /** Defines the minimum allowed value for a range widget. */
-            'aria-valuemin'?: number;
+            "aria-valuemin"?: number;
             /**
              * Defines the current value for a range widget.
              * @see aria-valuetext.
              */
-            'aria-valuenow'?: number;
+            "aria-valuenow"?: number;
             /** Defines the human readable text alternative of aria-valuenow for a range widget. */
-            'aria-valuetext'?: string;
+            "aria-valuetext"?: string;
         }
     }
 }
