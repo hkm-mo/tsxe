@@ -14,6 +14,34 @@ type Booleanish = boolean | "true" | "false";
 type NativeWheelEvent = WheelEvent;
 type LiteralUnion<T extends U, U = string> = T | (U & {});
 type AttrTarget = LiteralUnion<"_self" | "_blank" | "_parent" | "_top">;
+type LangCodeBCP47 = LiteralUnion<
+    "ar" | "ar-SA" |
+    "cs" | "cs-CZ" |
+    "da" | "da-DK" |
+    "de" | "de-DE" |
+    "el" | "el-GR" |
+    "en" | "en-AU" | "en-GB" | "en-IE" | "en-US" | "en-ZA" |
+    "es" | "es-ES" | "es-MX" |
+    "fi" | "fi-FI" | 
+    "fr" | "fr-CA" | "fr-FR" |
+    "he" | "he-IL" | 
+    "hi" | "hi-IN" | 
+    "hu" | "hu-HU" |
+    "id" | "id-ID" |
+    "it" | "it-IT" |
+    "ja" | "ja-JP" |
+    "ko" | "ko-KR" |
+    "nl" | "nl-BE" | "nl-NL" |
+    "no" | "no-NO" |
+    "pl" | "pl-PL" |
+    "pt" | "pt-BR" | "pt-PT" |
+    "ro" | "ro-RO" |
+    "ru" | "ru-RU" |
+    "sk" | "sk-SK" |
+    "sv" | "sv-SE" |
+    "th" | "th-TH" |
+    "tr" | "tr-TR" |
+    "zh" | "zh-CN" | "zh-HK" | "zh-TW">;
 
 type EventHandler<K extends keyof HTMLElementEventMap> = (this: HTMLElement, ev: HTMLElementEventMap[K]) => any;
 
@@ -346,7 +374,7 @@ declare global {
             draggable?: Booleanish;
             hidden?: boolean;
             id?: string;
-            lang?: string;
+            lang?: LangCodeBCP47;
             placeholder?: string;
             slot?: string;
             spellCheck?: Booleanish;
@@ -400,7 +428,7 @@ declare global {
         interface AnchorHTMLAttributes<T> extends HTMLAttributes<T> {
             download?: boolean | string;
             href?: string;
-            hrefLang?: string;
+            hrefLang?: LangCodeBCP47;
             media?: string;
             ping?: string;
             rel?: string;
@@ -417,7 +445,7 @@ declare global {
             coords?: string;
             download?: boolean | string;
             href?: string;
-            hrefLang?: string;
+            hrefLang?: LangCodeBCP47;
             media?: string;
             rel?: string;
             shape?: LiteralUnion<"circle" | "rect" | "poly" | "default">;
@@ -580,8 +608,8 @@ declare global {
             src?: string;
             step?: number | string;
             type?: LiteralUnion<"button" | "checkbox" | "color" | "date" | "datetime-local" | "email" | "file" |
-            "hidden" | "image" | "month" | "number" | "password" | "radio" | "range" | "reset" | "search" |
-            "submit" | "tel" | "text" | "time" | "url" | "week" | "datetime">;
+                "hidden" | "image" | "month" | "number" | "password" | "radio" | "range" | "reset" | "search" |
+                "submit" | "tel" | "text" | "time" | "url" | "week" | "datetime">;
             value?: string | string[] | number;
             width?: number | string;
         }
@@ -609,7 +637,7 @@ declare global {
             as?: string;
             crossOrigin?: string;
             href?: string;
-            hrefLang?: string;
+            hrefLang?: LangCodeBCP47;
             integrity?: string;
             media?: string;
             rel?: string;
@@ -796,7 +824,7 @@ declare global {
             kind?: string;
             label?: string;
             src?: string;
-            srcLang?: string;
+            srcLang?: LangCodeBCP47;
         }
 
         interface VideoHTMLAttributes<T> extends MediaHTMLAttributes<T> {
