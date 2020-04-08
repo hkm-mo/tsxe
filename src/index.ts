@@ -11,7 +11,7 @@ const eventAttr = /^on([A-Z][a-zA-Z]*?)(Capture)?$/;
 // non recursive flatten deep using a stack
 // note that depth control is hard/inefficient as we will need to tag EACH value with its own depth
 // also possible w/o reversing on shift/unshift, but array OPs on the end tends to be faster
-function flatten(input: any) {
+function flatten<T>(input: T[]): T[] {
     const stack = [...input];
     const res = [];
     while (stack.length) {
@@ -27,6 +27,23 @@ function flatten(input: any) {
     // reverse to restore input order
     return res.reverse();
 }
+
+
+// Polyfill Element Append
+const appendElement = typeof Element.prototype.append === "function" ?
+    Element.prototype.append :
+    function (this: Element, ...args: (string | Node)[]) {
+        // Source: https://github.com/jserz/js_piece/blob/master/DOM/ParentNode/append()/append().md
+        var argArr = Array.prototype.slice.call(arguments),
+            docFrag = document.createDocumentFragment();
+
+        argArr.forEach(function (argItem) {
+            var isNode = argItem instanceof Node;
+            docFrag.appendChild(isNode ? argItem : document.createTextNode(String(argItem)));
+        });
+
+        this.appendChild(docFrag);
+    }
 
 export const TSXe = {
     createElement(name: string, props: any, ...content: (string | Node)[]) {
@@ -59,7 +76,7 @@ export const TSXe = {
 
             });
 
-        element.append(...flatten(content));
+        appendElement.apply(element, flatten(content));
         return element;
     }
 };
