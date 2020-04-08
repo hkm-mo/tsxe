@@ -72,7 +72,6 @@ document.body.appendChild(appWrapper);
 
 * Support HTML elements only
 * Do NOT support Fragments
-* Do NOT support data-* attributes
 
 ## License
 
