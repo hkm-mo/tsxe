@@ -423,6 +423,12 @@ declare global {
              * @see https://html.spec.whatwg.org/multipage/custom-elements.html#attr-is
              */
             is?: string;
+
+            /**
+             * data-* attributes allow us to store extra information on standard, semantic HTML elements without other 
+             * hacks such as non-standard attributes, extra properties on DOM.
+             */
+            dataset?: {[key: string]: string}
         }
 
         interface AnchorHTMLAttributes<T> extends HTMLAttributes<T> {

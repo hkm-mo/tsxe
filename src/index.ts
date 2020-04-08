@@ -65,6 +65,12 @@ export const TSXe = {
                 }
                 else if (key === "className")
                     element.setAttribute("class", value as string);
+                else if (key === "dataset") {
+                    for (const key in value) {
+                        if (value.hasOwnProperty(key))
+                            element.setAttribute("data-" + key, value[key]);
+                    }
+                }
                 else if (key === "style" && typeof value === "object")
                     Object.assign(element.style, value);
                 else if (typeof value === "boolean") {
