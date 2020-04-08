@@ -20,7 +20,7 @@ function flatten(input: any) {
         if (Array.isArray(next)) {
             // push back array items, won't modify the original input
             stack.push(...next);
-        } else if(next){
+        } else if (next) {
             res.push(next);
         }
     }
@@ -48,8 +48,11 @@ export const TSXe = {
                 }
                 else if (key === "className")
                     element.setAttribute("class", value as string);
-                else if (key === "style" && typeof value === "object") {
+                else if (key === "style" && typeof value === "object")
                     Object.assign(element.style, value);
+                else if (typeof value === "boolean") {
+                    if (value)
+                        element.setAttribute(key, key);
                 }
                 else
                     element.setAttribute(key, value as string);
