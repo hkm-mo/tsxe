@@ -27,7 +27,8 @@
     "keywords": [
         "tsx",
         "jsx",
-        "without React",
+        "without",
+        "React",
         "template",
         "HTML",
         "DOM"
