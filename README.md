@@ -37,8 +37,10 @@ import TSXe from "tsxe";
 document.body.appendChild(
     <div class="appWrapper">
         <h1>My Great App</h1>
-        <div class="appBody">
-            <button onClick={()=>{ alert("Hello World"); }} style={{color: "red"}}>Say Hello</button>
+        <div class="appBody" dataset={{appData: "Hello"}}>
+            <button onClick={()=>{ alert("Hello World"); }} style={{color: "red"}}>
+                Say Hello
+            </button>
         </div>
     </div>
 );
@@ -55,6 +57,7 @@ appTitle.textContent = "My Great App";
 
 const appBody = document.createElement("div");
 appBody.className = "appBody";
+appBody.setAttribute("data-appData", "Hello");
 
 const button = document.createElement("button");
 button.textContent = "Say Hello";
