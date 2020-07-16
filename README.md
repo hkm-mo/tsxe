@@ -1,10 +1,23 @@
 # TSXe
 
+[![npm version](https://badge.fury.io/js/tsxe.svg)](https://www.npmjs.com/package/tsxe)
+
 Create HTML elements by TSX/JSX syntax without React.
+
+
+---
+**Breaking Change**
+
+From version 0.2.0, JSX.Element type was changed to `Node` from `HTMLElement`.
+
+---
+
 
 ## Featues
 
 * Supports Visual Studio Code's IntelliSense
+* Supports custom components
+* Supports fragments
 * Type checking for HTML tags and attributes
 * Type checking for CSS properties and values (by [CSSType](https://www.npmjs.com/package/csstype))
 
@@ -29,7 +42,9 @@ Update your tsconfig.json:
 
 ## Usage
 
-TSX/JSX code:
+### Getting Started
+
+#### TSX/JSX code
 
 ```tsx
 import TSXe from "tsxe";
@@ -46,7 +61,7 @@ document.body.appendChild(
 );
 ```
 
-Equivalent:
+#### Equivalent
 
 ```ts
 const appWrapper = document.createElement("div");
@@ -71,10 +86,40 @@ appWrapper.append(appTitle, appBody);
 document.body.appendChild(appWrapper);
 ```
 
+### Custom Component
+```tsx
+import { TSXe, TSXeComponent } from "tsxe";
+
+interface MyComponentProps {
+    title: string
+}
+
+class MyComponent extends TSXeComponent<MyComponentProps> {
+    render(): Node {
+        return <h1>{this.props.title}</h1>
+    }
+}
+
+document.body.appendChild(<MyComponent title="My Awsome Component"/>);
+```
+
+### Fragment
+```tsx
+import { TSXe, Fragment } from "tsxe";
+
+var fragment = (
+    <Fragment>
+        <label for="password">Password</label>
+        <input id="password" type="password" />
+    </Fragment>
+);
+
+document.body.appendChild(<div>{fragment}</div>)
+```
+
 ## Limitation
 
-* Support HTML elements only
-* Do NOT support Fragments
+* Do NOT support Fragments shorthand
 
 ## License
 
