@@ -47,7 +47,7 @@ type EventHandler<K extends keyof HTMLElementEventMap> = (this: HTMLElement, ev:
 
 declare global {
     namespace JSX {
-        type Element = HTMLElement;
+        type Element = Node;
 
         type DetailedHTMLProps<E extends HTMLAttributes<T>, T> = E;
 
