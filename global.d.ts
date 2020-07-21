@@ -11,7 +11,6 @@ import * as CSS from "csstype";
 
 
 type Booleanish = boolean | "true" | "false";
-type NativeWheelEvent = WheelEvent;
 type LiteralUnion<T extends U, U = string> = T | (U & {});
 type AttrTarget = LiteralUnion<"_self" | "_blank" | "_parent" | "_top">;
 type LangCodeBCP47 = LiteralUnion<
