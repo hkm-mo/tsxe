@@ -126,3 +126,5 @@ document.body.appendChild(<div>{fragment}</div>)
 Copyright (c) 2020 hkm-mo
 
 Licensed under the MIT license.
+
+HTML document by [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML) is licensed under [CC-BY-SA 2.5](https://creativecommons.org/licenses/by-sa/2.5/).
