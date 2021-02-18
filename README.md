@@ -1,6 +1,5 @@
 # TSXe
 
-[![npm version](https://badge.fury.io/js/tsxe.svg)](https://www.npmjs.com/package/tsxe)
 
 Create HTML elements by TSX/JSX syntax without React.
 
@@ -8,7 +7,7 @@ Create HTML elements by TSX/JSX syntax without React.
 ---
 **Breaking Change**
 
-From version 0.2.0, JSX.Element type was changed to `Node` from `HTMLElement`.
+From version 1.0.0, JSX.Element type was changed to `Node` from `HTMLElement`.
 
 ---
 
