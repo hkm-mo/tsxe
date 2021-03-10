@@ -9,7 +9,7 @@
 const eventAttr = /^on([A-Z][a-zA-Z]*?)(Capture)?$/;
 
 interface TSXeProperties {
-    children?: (string | Node)[],
+    children?: (string | Node | TSXeComponent<any>)[],
     [key: string]: any
 }
 
@@ -34,7 +34,7 @@ function flatten<T>(input: T[]): T[] {
 }
 
 const ___tsxe_component_fingerprint = new Object();
-export abstract class TSXeComponent<T> {
+export abstract class TSXeComponent<T = void> {
     private readonly ___tsxe_component_fingerprint = ___tsxe_component_fingerprint;
     protected props: TSXeProperties & T;
     constructor(props: T) {
@@ -48,7 +48,7 @@ export abstract class TSXeComponent<T> {
     }
 }
 
-class TSXeElement extends TSXeComponent<any> {
+class TSXeElement extends TSXeComponent<TSXeProperties> {
     protected name: string;
     constructor(name: string, props: TSXeProperties) {
         super(props);
@@ -124,9 +124,9 @@ function appendChilden(element: Element | DocumentFragment, content: (string | N
 }
 
 export const TSXe = {
-    createElement<T extends TSXeComponent<any>>(
-        name: string | { new(props: TSXeProperties): T },
-        props: any, ...content: (string | Node)[]) {
+    createElement<P extends TSXeProperties, T extends TSXeComponent<P>>(
+        name: string | { new(props: P): T },
+        props: P, ...content: (string | Node | TSXeComponent<any>)[]) {
         props = props || {};
         props.children = content;
 
