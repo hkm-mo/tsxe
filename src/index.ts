@@ -33,13 +33,19 @@ function flatten<T>(input: T[]): T[] {
     return res.reverse();
 }
 
+const ___tsxe_component_fingerprint = new Object();
 export abstract class TSXeComponent<T> {
+    private readonly ___tsxe_component_fingerprint = ___tsxe_component_fingerprint;
     protected props: TSXeProperties & T;
     constructor(props: T) {
         this.props = props;
     }
 
     abstract render(): Node;
+
+    public static IsComponent(obj: any): obj is TSXeComponent<any> {
+        return Boolean(obj && obj.___tsxe_component_fingerprint && obj.___tsxe_component_fingerprint === ___tsxe_component_fingerprint && "render" in obj);
+    }
 }
 
 class TSXeElement extends TSXeComponent<any> {
@@ -100,19 +106,21 @@ class TSXeFragment extends TSXeComponent<any> {
     }
 }
 
-function appendChilden(element: Element | DocumentFragment, content: (string | Node)[]) {
-    if ("append" in element) {
-        element.append(...content);
-    } else {
-        let e = element as Node;
-        let docFrag = document.createDocumentFragment();
+function appendChilden(element: Element | DocumentFragment, content: (string | Node | TSXeComponent<any>)[]) {
+    let e = element as Node;
+    let docFrag = document.createDocumentFragment();
 
-        content.forEach((argItem) => {
-            docFrag.appendChild(argItem instanceof Node ? argItem : document.createTextNode(String(argItem)));
-        });
+    content.forEach((argItem) => {
+        if (argItem instanceof Node) {
+            docFrag.appendChild(argItem);
+        } else if (TSXeComponent.IsComponent(argItem)) {
+            docFrag.appendChild(argItem.render());
+        } else {
+            docFrag.appendChild(document.createTextNode(String(argItem)));
+        }
+    });
 
-        e.appendChild(docFrag);
-    }
+    e.appendChild(docFrag);
 }
 
 export const TSXe = {
