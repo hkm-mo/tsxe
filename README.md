@@ -1,7 +1,10 @@
 # TSXe
 
 
-Create HTML elements by TSX/JSX syntax without React.
+Create HTML elements by TSX syntax without React. 
+
+TSXe is not another React. It was designed for adopting TSX syntax but without learning curve of React. 
+If you want to enjoy the React ecosystem, please use React instead.
 
 
 ---
