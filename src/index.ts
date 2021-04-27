@@ -71,6 +71,17 @@ export abstract class TSXeComponent<T = TSXeComponentProps> {
     public static getComponentFromNode(obj: Node) {
         return (obj as TSXeNode)?.___tsxe_component || null;
     }
+
+    public static createComponent<P extends TSXeProperties, T extends TSXeComponent<P>>(
+        name: { new(props: P): T },
+        props: P, ...content: (string | Node | TSXeComponent<any>)[]) {
+        props = props || {};
+        props.children = content;
+
+        let component = new name(props);
+        component.innerRender();
+        return component;
+    }
 }
 
 function renderIntrinsicElement<P extends TSXeProperties>(name: string, props: P) {
@@ -141,13 +152,13 @@ export const TSXe = {
     createElement<P extends TSXeProperties, T extends TSXeComponent<P>>(
         name: string | { new(props: P): T },
         props: P, ...content: (string | Node | TSXeComponent<any>)[]) {
-        props = props || {};
-        props.children = content;
 
         if (typeof name === "string") {
+            props = props || {};
+            props.children = content;
             return renderIntrinsicElement(name, props);
         } else {
-            let component = new name(props);
+            let component = TSXeComponent.createComponent(name, props, ...content);
             return component.innerRender();
         }
     },
