@@ -37,8 +37,10 @@ function flatten<T>(input: T[]): T[] {
     return res.reverse();
 }
 
+interface TSXeComponentProps {
+}
 
-export abstract class TSXeComponent<T = void> {
+export abstract class TSXeComponent<T = TSXeComponentProps> {
     private readonly ___tsxe_component = true;
 
     private _node: TSXeNode | null = null;
