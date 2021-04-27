@@ -107,12 +107,11 @@ function renderIntrinsicElement<P extends TSXeProperties>(name: string, props: P
                     }
                 else if (key === "style" && typeof value === "object")
                     Object.assign(element.style, value);
-                else if (typeof value === "boolean") 
-                {
+                else if (typeof value === "boolean") {
                     if (value)
                         element.setAttribute(key, key);
                 }
-                else if (key === "children") 
+                else if (key === "children")
                     appendChilden(element, flatten(value));
                 else
                     element.setAttribute(key, value as string);
