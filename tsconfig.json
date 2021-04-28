@@ -6,6 +6,7 @@
         "rootDir": "./src",
         "jsx": "react",
         "jsxFactory": "TSXe.createElement",
+        "jsxFragmentFactory": "TSXe.Fragment",
         "lib": [
             "ES6",
             "DOM"

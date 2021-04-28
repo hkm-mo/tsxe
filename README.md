@@ -19,7 +19,7 @@ From version 1.0.0, JSX.Element type was changed to `Node` from `HTMLElement`.
 
 * Supports Visual Studio Code's IntelliSense
 * Supports custom components
-* Supports fragments
+* Supports fragments (Short Syntax only available on TypeScript 4.0+)
 * Type checking for HTML tags and attributes
 * Type checking for CSS properties and values (by [CSSType](https://www.npmjs.com/package/csstype))
 
@@ -38,6 +38,8 @@ Update your tsconfig.json:
     "compilerOptions": {
         "jsx": "react",
         "jsxFactory": "TSXe.createElement",
+        /* TypeScript 4.0+ Only */
+        "jsxFragmentFactory": "TSXe.Fragment",
     }
 }
 ```
@@ -119,9 +121,6 @@ var fragment = (
 document.body.appendChild(<div>{fragment}</div>)
 ```
 
-## Limitation
-
-* Do NOT support Fragments shorthand
 
 ## License
 
