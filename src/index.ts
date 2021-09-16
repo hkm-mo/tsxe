@@ -72,13 +72,18 @@ export abstract class TSXeComponent<T = TSXeComponentProps> {
         return (obj as TSXeNode)?.___tsxe_component || null;
     }
 
+    public static createComponent<P extends TSXeProperties, T extends TSXeComponent<P>>(name: { new(props: P): T }) : T;
+    public static createComponent<P extends TSXeProperties, T extends TSXeComponent<P>>(name: { new(props: P): T }, props: P) : T;
     public static createComponent<P extends TSXeProperties, T extends TSXeComponent<P>>(
         name: { new(props: P): T },
-        props: P, ...content: (string | Node | TSXeComponent<any>)[]) {
-        props = props || {};
-        props.children = content;
+        props: P, ...content: (string | Node | TSXeComponent<any>)[]):T;
+    public static createComponent<P extends TSXeProperties, T extends TSXeComponent<P>>(
+        name: { new(props: P): T },
+        props?: P, ...content: (string | Node | TSXeComponent<any>)[]) {
+        const _props = props || ({} as P);
+        _props.children = content;
 
-        let component = new name(props);
+        let component = new name(_props);
         component.innerRender();
         return component;
     }
