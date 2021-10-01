@@ -11,13 +11,17 @@
         "LICENSE",
         "README.md"
     ],
-    "dependencies": {
-        "csstype": "^3.0.8"
-    },
+    "dependencies": {},
     "devDependencies": {
-        "typescript": "^4.2.4"
+        "csstype": "^3.0.8",
+        "ts-loader": "^9.2.6",
+        "typescript": "^4.4.3",
+        "webpack": "^5.55.1",
+        "webpack-cli": "^4.8.0"
     },
     "scripts": {
+        "build:dev": "webpack --mode=development",
+        "build:prod": "webpack --mode=production",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "repository": {

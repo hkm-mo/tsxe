@@ -13,9 +13,11 @@
         ],
         "declaration": true,
         "strict": true,
-        "esModuleInterop": true
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "allowJs": false
     },
     "include": [
-        "src/**/*", "global.d.ts"
+        "src/**/*"
     ]
 }

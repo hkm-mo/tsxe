@@ -73,12 +73,6 @@ declare global {
              */
             "address": DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>;
             /**
-             * ObsoleteThis feature is obsolete. Although it may still work in some browsers, its use is discouraged
-             * since it could be removed at any time. Try to avoid using it.
-             * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/applet
-             */
-            "applet": DetailedHTMLProps<HTMLAttributes<HTMLAppletElement>, HTMLAppletElement>;
-            /**
              * The HTML &lt;area&gt; element defines a hot-spot region on an image, and optionally associates it
              * with a hypertext link. This element is used only within a &lt;map&gt; element.
              * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/area
@@ -121,12 +115,6 @@ declare global {
              * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
              */
             "base": DetailedHTMLProps<BaseHTMLAttributes<HTMLBaseElement>, HTMLBaseElement>;
-            /**
-             * ObsoleteThis feature is obsolete. Although it may still work in some browsers, its use is discouraged
-             * since it could be removed at any time. Try to avoid using it.
-             * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/basefont
-             */
-            "basefont": DetailedHTMLProps<HTMLAttributes<HTMLBaseFontElement>, HTMLBaseFontElement>;
             /**
              * The HTML Bidirectional Isolate element (&lt;bdi&gt;)  tells the browser's bidirectional algorithm to
              * treat the text it contains in isolation from its surrounding text. It's particularly useful when a
@@ -915,8 +903,6 @@ declare global {
             onDragEndCapture?: EventHandler<"dragend">;
             onDragEnter?: EventHandler<"dragenter">;
             onDragEnterCapture?: EventHandler<"dragenter">;
-            onDragExit?: EventHandler<"dragexit">;
-            onDragExitCapture?: EventHandler<"dragexit">;
             onDragLeave?: EventHandler<"dragleave">;
             onDragLeaveCapture?: EventHandler<"dragleave">;
             onDragOver?: EventHandler<"dragover">;
