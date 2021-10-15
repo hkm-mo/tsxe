@@ -5,9 +5,8 @@
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "files": [
-        "dist/index.d.ts",
-        "dist/index.js",
-        "global.d.ts",
+        "dist/**/*",
+        "src/global.d.ts",
         "LICENSE",
         "README.md"
     ],

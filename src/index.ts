@@ -1,5 +1,4 @@
-
-
+import "./JSX"
 import { TSXeProperties } from "./interfaces";
 import Component from "./TSXeComponent";
 import { TSXeFragment } from "./TSXeFragment";
