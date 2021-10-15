@@ -33,7 +33,7 @@ $ npm install tsxe
 
 Update your tsconfig.json:
 
-```json
+```JSONC
 {
     "compilerOptions": {
         "jsx": "react",
