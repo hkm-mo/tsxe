@@ -121,6 +121,9 @@ var fragment = (
 document.body.appendChild(<div>{fragment}</div>)
 ```
 
+## Supported Browsers
+
+Modern browsers and Internet Explorer 11 
 
 ## License
 
