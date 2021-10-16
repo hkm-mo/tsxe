@@ -1,7 +1,6 @@
 const path = require("path");
 
 const config = {
-    target: "web",
     entry: {
         index: __dirname + "/src/index.ts",
     },
@@ -39,7 +38,7 @@ const config = {
     },
     resolve: {
         extensions: [".tsx", ".ts", ".js"],
-    },
+    }
 };
 
 module.exports = (env, argv) => {
