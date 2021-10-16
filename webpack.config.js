@@ -8,7 +8,7 @@ const config = {
     output: {
         path: path.resolve(__dirname, "./dist"),
         filename: "index.js",
-        library: "TSXe",
+        library: "tsxe",
         libraryTarget: "umd",
         globalObject: "this",
         umdNamedDefine: true,
