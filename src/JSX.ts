@@ -1,3 +1,5 @@
+/// <reference path="./TSXe.ts" />
+
 /**
  * Code was modified based on https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/react/index.d.ts
  * which licensed under the MIT license (https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/master/LICENSE)
@@ -48,7 +50,10 @@ declare global {
     namespace JSX {
         type Element = Node;
 
-        type DetailedHTMLProps<E extends HTMLAttributes<T>, T> = E;
+        type DetailedHTMLProps<E extends HTMLAttributes<T>, T> = TSXe.ClassAttributes<T> & E;
+
+        interface IntrinsicAttributes extends TSXe.Attributes { }
+        interface IntrinsicClassAttributes<T> extends TSXe.RefAttributes<T> { }
 
         //HTMLElementTagNameMap
         interface IntrinsicElements {

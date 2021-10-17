@@ -1,5 +1,8 @@
-import "./JSX"
+/// <reference path="./TSXe.ts" />
+/// <reference path="./JSX.ts" />
+
 import { TSXeProperties } from "./interfaces";
+import RefObject from "./RefObject";
 import Component from "./TSXeComponent";
 import { TSXeFragment } from "./TSXeFragment";
 import { appendChilden, flatten } from "./utilities";
@@ -28,6 +31,10 @@ function renderIntrinsicElement<P extends TSXeProperties>(name: string, props: P
                             (key != "onGotPointerCapture" && key != "onLostPointerCapture") ? Boolean(match[2]) : false
                         );
                     }
+                } else if (key === "ref") {
+                    if (value instanceof RefObject) {
+                        value.current = element;
+                    }
                 } else if (key === "dataset")
                     for (const key in value) {
                         if (value.hasOwnProperty(key))
@@ -49,11 +56,12 @@ function renderIntrinsicElement<P extends TSXeProperties>(name: string, props: P
     return element;
 }
 
+
+
 export const TSXe = {
     createElement<P extends TSXeProperties, T extends Component<P>>(
         name: string | { new(props: P): T },
         props: P, ...content: (string | Node | Component<any>)[]) {
-
         if (typeof name === "string") {
             props = props || {};
             props.children = content;
@@ -73,6 +81,9 @@ export const TSXe = {
         } else {
             root.appendChild(document.createTextNode(String(component)));
         }
+    },
+    createRef<T>(): TSXe.RefObject<T> {
+        return new RefObject<T>();
     }
 };
 
