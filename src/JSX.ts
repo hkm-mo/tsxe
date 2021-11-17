@@ -1,4 +1,4 @@
-/// <reference path="./TSXe.ts" />
+
 
 /**
  * Code was modified based on https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/react/index.d.ts
@@ -10,6 +10,7 @@
  */
 
 import * as CSS from "csstype";
+import { Attributes, ClassAttributes, RefAttributes } from "./interfaces";
 
 
 type Booleanish = boolean | "true" | "false";
@@ -50,10 +51,10 @@ declare global {
     namespace JSX {
         type Element = Node;
 
-        type DetailedHTMLProps<E extends HTMLAttributes<T>, T> = TSXe.ClassAttributes<T> & E;
+        type DetailedHTMLProps<E extends HTMLAttributes<T>, T> = ClassAttributes<T> & E;
 
-        interface IntrinsicAttributes extends TSXe.Attributes { }
-        interface IntrinsicClassAttributes<T> extends TSXe.RefAttributes<T> { }
+        interface IntrinsicAttributes extends Attributes { }
+        interface IntrinsicClassAttributes<T> extends RefAttributes<T> { }
 
         //HTMLElementTagNameMap
         interface IntrinsicElements {

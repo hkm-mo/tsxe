@@ -1,8 +1,7 @@
-/// <reference path="./TSXe.ts" />
 /// <reference path="./JSX.ts" />
 
-import { TSXeProperties } from "./interfaces";
-import RefObject from "./RefObject";
+import { RefObject, TSXeProperties } from "./interfaces";
+import RefObjectImplement from "./RefObjectImplement";
 import Component from "./TSXeComponent";
 import { TSXeFragment } from "./TSXeFragment";
 import { appendChilden, flatten } from "./utilities";
@@ -82,8 +81,8 @@ export const TSXe = {
             root.appendChild(document.createTextNode(String(component)));
         }
     },
-    createRef<T>(): TSXe.RefObject<T> {
-        return new RefObject<T>();
+    createRef<T>(): RefObject<T> {
+        return new RefObjectImplement<T>();
     }
 };
 
