@@ -18,13 +18,21 @@ export default abstract class Component<T = ComponentProps> {
 
     public abstract render(): Node;
 
-    public innerRender(): TSXeNode {
+    public safeRender(): TSXeNode {
         if (!this._node) {
             this._node = this.render() as TSXeNode;
             this._node.___tsxe_component = this;
         }
 
         return this._node;
+    }
+
+    /**
+     * @deprecated Component.innerRender was replaced by Component.safeRender
+     */
+    public innerRender(): TSXeNode {
+        console.warn("[Deprecated] Component.innerRender was replaced by Component.safeRender");
+        return this.safeRender();
     }
 
     public static isComponent(obj: any): obj is Component<any> {
@@ -47,7 +55,7 @@ export default abstract class Component<T = ComponentProps> {
         _props.children = content;
 
         let component = new name(_props);
-        component.innerRender();
+        component.safeRender();
         return component;
     }
 }

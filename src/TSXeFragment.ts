@@ -11,7 +11,7 @@ export class TSXeFragment extends Component<any> {
 
         return fragment;
     }
-    innerRender(): TSXeNode {
+    safeRender(): TSXeNode {
         return this.render();
     }
 }

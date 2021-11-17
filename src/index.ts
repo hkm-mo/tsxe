@@ -69,7 +69,7 @@ export const TSXe = {
             return renderIntrinsicElement(name, props);
         } else {
             let component = Component.createComponent(name, props, ...content);
-            return component.innerRender();
+            return component.safeRender();
         }
     },
     Fragment: TSXeFragment,
@@ -78,7 +78,7 @@ export const TSXe = {
         if (component instanceof Node) {
             root.appendChild(component);
         } else if (Component.isComponent(component)) {
-            root.appendChild(component.innerRender());
+            root.appendChild(component.safeRender());
         } else {
             root.appendChild(document.createTextNode(String(component)));
         }
