@@ -31,8 +31,10 @@ function renderIntrinsicElement<P extends TSXeProperties>(name: string, props: P
                         );
                     }
                 } else if (key === "ref") {
-                    if (value instanceof RefObject) {
+                    if (value instanceof RefObjectImplement) {
                         value.current = element;
+                    } else if (typeof value === "function") {
+                        value(element);
                     }
                 } else if (key === "dataset")
                     for (const key in value) {
