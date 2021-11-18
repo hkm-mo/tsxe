@@ -1,5 +1,5 @@
 import { TSXe } from ".";
-import { TSXeProperties } from "./interfaces";
+import { RefObject, TSXeProperties } from "./interfaces";
 import RefObjectImplement from "./RefObjectImplement";
 import Component from "./TSXeComponent";
 
@@ -100,4 +100,8 @@ export function render(component: string | Node | Component<any>, root: Node) {
     } else {
         root.appendChild(document.createTextNode(String(component)));
     }
+}
+
+export function createRef<T>(): RefObject<T> {
+    return new RefObjectImplement<T>();
 }
