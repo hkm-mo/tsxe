@@ -1,8 +1,9 @@
 /// <reference path="./JSX.ts" />
 
-import Component from "./TSXeComponent";
+import _Component from "./TSXeComponent";
 import { TSXeFragment } from "./TSXeFragment";
-import { createElement, createRef, render } from "./utilities";
+import { createElement as _createElement, createRef as _createRef, render as _render } from "./utilities";
+import { TSXeNode as _TSXeNode, RefObject as _RefObject } from "./interfaces";
 
 /**
  * @author hkm-mo
@@ -10,15 +11,21 @@ import { createElement, createRef, render } from "./utilities";
  * @license MIT
  */
 
-export const TSXe = {
-    createElement: createElement,
-    Fragment: TSXeFragment,
-    Component: Component,
-    render: render,
-    createRef: createRef
-};
+
+export namespace TSXe {
+    export type RefObject<T> = _RefObject<T>;
+    export type TSXeNode = _TSXeNode;
+    export const createElement = _createElement;
+    export const Fragment = TSXeFragment;
+    export const Component = _Component;
+    export const render = _render;
+    export const createRef = _createRef
+}
 
 export const Fragment = TSXeFragment;
 export default TSXe;
 
-export const TSXeComponent = Component;
+export const TSXeComponent = _Component;
+
+export type TSXeNode = _TSXeNode;
+export type RefObject<T> = _RefObject<T>;
