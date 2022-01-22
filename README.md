@@ -44,9 +44,7 @@ Update your tsconfig.json:
 }
 ```
 
-## Usage
-
-### Getting Started
+## Examples
 
 #### TSX/JSX code
 
@@ -92,13 +90,13 @@ document.body.appendChild(appWrapper);
 
 ### Custom Component
 ```tsx
-import { TSXe, TSXeComponent } from "tsxe";
+import TSXe from "tsxe";
 
 interface MyComponentProps {
     title: string
 }
 
-class MyComponent extends TSXeComponent<MyComponentProps> {
+class MyComponent extends TSXe.Component<MyComponentProps> {
     render(): Node {
         return <h1>{this.props.title}</h1>
     }
@@ -120,6 +118,28 @@ var fragment = (
 
 document.body.appendChild(<div>{fragment}</div>)
 ```
+
+## APIs
+
+### TSXe.render(component: string | Node | Component<any>, container: Node): void
+
+Render Nodes into the container node. It's an alternative to [Node.appendChild](https://developer.mozilla.org/en-US/docs/Web/API/Node/appendChild) / [Element.append](https://developer.mozilla.org/en-US/docs/Web/API/Element/append)
+
+
+### TSXe.Component<T>
+
+Base class of custom component, all custom components should inherit from this class.
+
+
+### static TSXe.Component.createComponent(name: Component<P>, props?: TSXeProperties, ...content: (string | Node Component<any>)[]): Node
+
+Create component with specificed component class. This method is a low level method. 
+
+### TSXe.createRef<T>()
+
+Create reference object.
+
+
 
 ## Supported Browsers
 
