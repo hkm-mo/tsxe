@@ -2,7 +2,7 @@ import Component from "./TSXeComponent";
 
 
 export interface TSXeNode extends Node {
-    ___tsxe_component?: Component<any>
+    ___tsxe_component: Component<any>
 }
 
 export interface TSXeProperties {
@@ -14,7 +14,7 @@ export interface TSXeProperties {
  * @internal You shouldn't need to use this type since you never see these attributes
  * inside your component or have to validate them.
  */
- export interface Attributes {
+export interface Attributes {
 }
 
 
