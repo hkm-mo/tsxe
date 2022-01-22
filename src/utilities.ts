@@ -65,6 +65,8 @@ export function renderIntrinsicElement<P extends TSXeProperties>(name: string, p
                     }
                 else if (key === "style" && typeof value === "object")
                     Object.assign(element.style, value);
+                else if (key === "className")
+                    element.className = value;
                 else if (typeof value === "boolean") {
                     if (value)
                         element.setAttribute(key, key);
