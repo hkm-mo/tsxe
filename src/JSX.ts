@@ -1003,6 +1003,7 @@ declare global {
             // Standard HTML Attributes
             accessKey?: string;
             class?: string;
+            className?: string,
             contentEditable?: Booleanish | "inherit";
             contextMenu?: string;
             dir?: LiteralUnion<"ltr" | "rtl" | "auto">;
