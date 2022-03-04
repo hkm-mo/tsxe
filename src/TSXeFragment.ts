@@ -1,4 +1,3 @@
-import { TSXeNode } from "./interfaces";
 import Component from "./TSXeComponent";
 import { appendChilden, flatten } from "./utilities";
 
