@@ -1,4 +1,3 @@
-import { TSXe } from ".";
 import { RefObject, TSXeProperties } from "./interfaces";
 import RefObjectImplement from "./RefObjectImplement";
 import Component from "./TSXeComponent";
@@ -9,7 +8,7 @@ export function appendChilden(element: Element | DocumentFragment, content: (str
     let docFrag = document.createDocumentFragment();
 
     content.forEach((argItem) => {
-        TSXe.render(argItem, docFrag);
+        render(argItem, docFrag);
     });
 
     e.appendChild(docFrag);
