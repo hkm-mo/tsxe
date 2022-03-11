@@ -105,6 +105,7 @@ export function createElement<P extends Properties, T extends Component<P>>(
         let component = Component.createComponent(type, props, ...children);
         return component.safeRender();
     } else {
+        props.children = children;
         return type(props);
     }
 }
