@@ -1,7 +1,14 @@
-import { RefObject, TSXeProperties } from "./interfaces";
+import { ClassComponent, FunctionComponent, Properties, RefObject } from "./interfaces";
 import RefObjectImplement from "./RefObjectImplement";
 import Component from "./TSXeComponent";
 
+
+function isClassComponentConstructor<P, T extends Component<P>>(obj: any): obj is ClassComponent<P, T> {
+    if (typeof obj == "function" && obj.prototype && typeof obj.prototype.safeRender == "function") {
+        return true;
+    }
+    return false;
+}
 
 export function appendChilden(element: Element | DocumentFragment, content: (string | Node | Component<any>)[]) {
     let e = element as Node;
@@ -35,7 +42,7 @@ export function flatten<T>(input: T[]): T[] {
 }
 
 const eventAttr = /^on([A-Z][a-zA-Z]*?)(Capture)?$/;
-export function renderIntrinsicElement<P extends TSXeProperties>(name: string, props: P) {
+export function renderIntrinsicElement<P extends Properties>(name: string, props: P) {
     let element = document.createElement(name);
 
     Object.keys(props)
@@ -80,16 +87,25 @@ export function renderIntrinsicElement<P extends TSXeProperties>(name: string, p
     return element;
 }
 
-export function createElement<P extends TSXeProperties, T extends Component<P>>(
-    name: string | { new(props: P): T },
-    props: P, ...content: (string | Node | Component<any>)[]) {
-    if (typeof name === "string") {
+/**
+ * Create DOM `node` or `TSXe.Component` of the given type.
+ * @param type A HTML tag name or TSXe.Component type
+ * @param props Properties of given type
+ * @param children Any objects to be place under the element to be created 
+ * @returns A DOM `node`
+ */
+export function createElement<P extends Properties, T extends Component<P>>(
+    type: string | ClassComponent<P, T> | FunctionComponent<P>,
+    props: P, ...children: (string | Node | Component<any>)[]) {
+    if (typeof type === "string") {
         props = props || {};
-        props.children = content;
-        return renderIntrinsicElement(name, props);
-    } else {
-        let component = Component.createComponent(name, props, ...content);
+        props.children = children;
+        return renderIntrinsicElement(type, props);
+    } else if (isClassComponentConstructor<P, T>(type)) {
+        let component = Component.createComponent(type, props, ...children);
         return component.safeRender();
+    } else {
+        return type(props);
     }
 }
 
@@ -106,3 +122,4 @@ export function render(component: string | Node | Component<any>, root: Node) {
 export function createRef<T>(): RefObject<T> {
     return new RefObjectImplement<T>();
 }
+

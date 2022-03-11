@@ -1,4 +1,4 @@
-import { TSXeNode, TSXeProperties } from "./interfaces";
+import { ClassComponent, Properties, TSXeNode } from "./interfaces";
 
 interface ComponentProps {
 }
@@ -14,7 +14,7 @@ export default abstract class Component<T = ComponentProps> {
         return this._node;
     }
 
-    protected props: TSXeProperties & T;
+    protected props: Properties & T;
 
     constructor(props: T) {
         this.props = props;
@@ -46,6 +46,11 @@ export default abstract class Component<T = ComponentProps> {
         return this.safeRender();
     }
 
+    /**
+     * Determines whether the passed value is `TSXe.Component`
+     * @param obj The value to be checked.
+     * @returns `true` if the value is a `TSXe.Component`; otherwise, `false`.
+     */
     public static isComponent(obj: any): obj is Component<any> {
         return Boolean(obj && obj.___tsxe_component && obj.___tsxe_component === true);
     }
@@ -64,14 +69,14 @@ export default abstract class Component<T = ComponentProps> {
      * @param name 
      * @returns Component DOM output
      */
-    public static createComponent<P extends TSXeProperties, T extends Component<P>>(name: { new(props: P): T }) : T;
+    public static createComponent<P extends Properties, T extends Component<P>>(name: ClassComponent<P, T>) : T;
     /**
      * Create component with specificed component class
      * @param name Specificed component class
      * @param props Properties for constructing the component
      * @returns Component DOM output
      */
-    public static createComponent<P extends TSXeProperties, T extends Component<P>>(name: { new(props: P): T }, props: P) : T;
+    public static createComponent<P extends Properties, T extends Component<P>>(name: ClassComponent<P, T>, props: P) : T;
     /**
      * Create component with specificed component class
      * @param name Specificed component class
@@ -79,8 +84,8 @@ export default abstract class Component<T = ComponentProps> {
      * @param content Contents wrapped by the component
      * @returns Component DOM output
      */
-    public static createComponent<P extends TSXeProperties, T extends Component<P>>(
-        name: { new(props: P): T },
+    public static createComponent<P extends Properties, T extends Component<P>>(
+        name: ClassComponent<P, T>,
         props: P, ...content: (string | Node | Component<any>)[]):T;
     /**
      * Create component with specificed component class
@@ -89,8 +94,8 @@ export default abstract class Component<T = ComponentProps> {
      * @param content Contents wrapped by the component
      * @returns Component DOM output
      */
-    public static createComponent<P extends TSXeProperties, T extends Component<P>>(
-        name: { new(props: P): T },
+    public static createComponent<P extends Properties, T extends Component<P>>(
+        name: ClassComponent<P, T>,
         props?: P, ...content: (string | Node | Component<any>)[]) {
         const _props = props || ({} as P);
         _props.children = content;
@@ -100,3 +105,5 @@ export default abstract class Component<T = ComponentProps> {
         return component;
     }
 }
+
+

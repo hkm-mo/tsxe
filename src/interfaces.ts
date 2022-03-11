@@ -1,15 +1,5 @@
 import Component from "./TSXeComponent";
 
-
-export interface TSXeNode extends Node {
-    ___tsxe_component: Component<any>
-}
-
-export interface TSXeProperties {
-    children?: (string | Node | Component<any>)[],
-    [key: string]: any
-}
-
 /**
  * @internal You shouldn't need to use this type since you never see these attributes
  * inside your component or have to validate them.
@@ -17,6 +7,22 @@ export interface TSXeProperties {
 export interface Attributes {
 }
 
+export interface ClassComponent<P, T extends Component<P>> { 
+    new(props: P): T
+}
+
+export type FunctionComponent<P> = (props: PropsWithChildren<P> | P) => Node
+
+export interface Properties {
+    children?: (string | Node | Component<any>)[],
+    [key: string]: any
+}
+
+export type PropsWithChildren<P> = P & Properties;
+
+export interface TSXeNode extends Node {
+    ___tsxe_component: Component<any>
+}
 
 export interface RefObject<T> {
     readonly current: T | null;
