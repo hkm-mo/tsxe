@@ -1,10 +1,10 @@
-import Component from "./TSXeComponent";
+import { Component } from "./Component";
 import { appendChilden, flatten } from "./utilities";
 
 /**
  * A class for building HTML Fragment.
  */
-export class TSXeFragment extends Component<any> {
+export class Fragment extends Component<any> {
     render(): Node {
         let fragment = document.createDocumentFragment();
 

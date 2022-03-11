@@ -1,4 +1,4 @@
-import Component from "./TSXeComponent";
+import { Component } from "./Component";
 
 /**
  * @internal You shouldn't need to use this type since you never see these attributes

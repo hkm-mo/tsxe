@@ -1,6 +1,6 @@
 import { ClassComponent, FunctionComponent, Properties, RefObject } from "./interfaces";
-import RefObjectImplement from "./RefObjectImplement";
-import Component from "./TSXeComponent";
+import { RefObjectImplement } from "./RefObjectImplement";
+import { Component } from "./Component";
 
 
 function isClassComponentConstructor<P, T extends Component<P>>(obj: any): obj is ClassComponent<P, T> {

@@ -6,7 +6,7 @@ interface ComponentProps {
 /**
  * An abstract class for building custom component.
  */
-export default abstract class Component<T = ComponentProps> {
+export abstract class Component<T = ComponentProps> {
     private readonly ___tsxe_component = true;
 
     private _node: TSXeNode | null = null;
