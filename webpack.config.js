@@ -7,10 +7,11 @@ const config = {
     output: {
         path: path.resolve(__dirname, "./dist"),
         filename: "index.js",
-        library: "tsxe",
-        libraryTarget: "umd",
-        globalObject: "this",
-        umdNamedDefine: true,
+        library: {
+            name: "tsxe",
+            type: "umd",
+            umdNamedDefine: true
+        },
         clean: true,
     },
     watchOptions: {
@@ -43,7 +44,7 @@ const config = {
 
 module.exports = (env, argv) => {
     if (argv.mode === "development") {
-        // * add some development rules here
+        config.devtool = "source-map";
     } else if (argv.mode === "production") {
         // * add some prod rules here
     } else {
