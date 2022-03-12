@@ -117,6 +117,11 @@ export function createElement<P extends Properties, T extends Component<P>>(
     }
 }
 
+/**
+ * Render Nodes into the container node.
+ * @param component Text, `Node` or `Component` to render
+ * @param root Container of the component
+ */
 export function render(component: string | Node | Component<any>, root: Node) {
     if (component instanceof Node) {
         root.appendChild(component);
