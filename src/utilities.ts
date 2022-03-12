@@ -97,16 +97,23 @@ export function renderIntrinsicElement<P extends Properties>(name: string, props
 export function createElement<P extends Properties, T extends Component<P>>(
     type: string | ClassComponent<P, T> | FunctionComponent<P>,
     props: P, ...children: (string | Node | Component<any>)[]) {
+    props = props || {};
     if (typeof type === "string") {
-        props = props || {};
         props.children = children;
         return renderIntrinsicElement(type, props);
     } else if (isClassComponentConstructor<P, T>(type)) {
         let component = Component.createComponent(type, props, ...children);
+        if (props.ref) {
+            props.ref.current = component;
+        }
         return component.safeRender();
     } else {
         props.children = children;
-        return type(props);
+        if (props.ref) {
+            return props.ref.current = type(props);
+        } else {
+            return type(props);
+        }
     }
 }
 
