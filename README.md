@@ -25,7 +25,7 @@ npm install tsxe
 
 ## Setup
 TSXe supports both TSX and JSX style of syntax. 
-And there needs JavaScript module bundler to pack your code to it can run in browser, webpack is recommended.
+And there needs JavaScript module bundler to pack your code and enable it run in browser, webpack is recommended.
 
 
 ### TSX: webpack + TypeScript
@@ -246,6 +246,7 @@ Modern browsers and Internet Explorer 11
 * And eslint to ensure the code quality
 * Add unit tests
 * Create automatic tools to update JSX content
+* Create command line tools to create new projects
 
 
 ## License
