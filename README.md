@@ -1,35 +1,34 @@
 # TSXe
 
+Create DOM objects by JSX syntax without React. 
 
-Create HTML elements by TSX syntax without React. 
+JSX syntax have the advantages of easy to write, read and maintenance for complicated HTML elements creation in JavaScript and JSX usually mixed with React JS.
 
-TSXe is not another React. It was designed for adopting TSX syntax but without learning curve of React. 
-If you want to enjoy the React ecosystem, please use React instead.
-
-
----
-**Breaking Change**
-
-From version 1.0.0, JSX.Element type was changed to `Node` from `HTMLElement`.
-
----
-
+However, if you may want to control the DOM directly or don't want to deal with React lifecycle, TSXe will be an option.
+It makes possible to create DOM objects with JSX syntax without React and supports most browsers, includes IE 11.
 
 ## Featues
 
 * Supports Visual Studio Code's IntelliSense
-* Supports custom components
+* Supports custom components, both Function Component and Class Component
 * Supports fragments (Short Syntax only available on TypeScript 4.0+)
+* Supports Refs (not support callback Refs)
 * Type checking for HTML tags and attributes
 * Type checking for CSS properties and values (by [CSSType](https://www.npmjs.com/package/csstype))
 
 ## Install
 
 ```sh
-$ npm install tsxe
+npm install tsxe
 ```
 
+
 ## Setup
+TSXe supports both TSX and JSX style of syntax. 
+And there needs JavaScript module bundler to pack your code to it can run in browser, webpack is recommended.
+
+
+### TSX: webpack + TypeScript
 
 Update your tsconfig.json:
 
@@ -44,9 +43,86 @@ Update your tsconfig.json:
 }
 ```
 
+Update your webpack.config.js:
+```JavaScript
+const path = require("path");
+
+module.exports = {
+    mode: 'development',
+    devtool: "source-map",
+    entry: {
+        index: __dirname + "/src/index.tsx",
+    },
+    output: {
+        path: path.resolve(__dirname, "./dist"),
+        filename: "index.js"
+    },
+    plugins: [
+    ],
+    module: {
+        rules: [
+            {
+                test: /\.tsx?$/,
+                include: /src(\\|\/)/,
+                use: ["ts-loader"],
+            }
+        ],
+    },
+    resolve: {
+        extensions: [".tsx", ".ts"],
+    }
+};
+```
+
+### JSX: webpack + Babel
+
+Install the packages you neeeded
+
+```sh
+npm install --save-dev @babel/core @babel/preset-env @babel/preset-react webpack webpack-cli babel-loader
+```
+
+Create / Update your webpack.config.js
+
+```JavaScript
+const path = require("path");
+
+return {
+    // This is a partial configuration
+    // For the details, please refer webpack and Babel official documents
+    module: {
+        rules: [
+            {
+                test: /\.jsx$/,
+                use: [
+                    {
+                        loader: "babel-loader",
+                        options: {
+                            presets: [
+                                "@babel/preset-env",
+                                [
+                                    "@babel/preset-react",
+                                    {
+                                        pragma: "TSXe.createElement",
+                                        pragmaFrag: "TSXe.Fragment"
+                                    }
+                                ]
+                            ]
+                        }
+                    },
+                ],
+            }
+        ],
+    },
+    resolve: {
+        extensions: [".jsx", ".js"],
+    }
+};
+```
+
 ## Examples
 
-#### TSX/JSX code
+### Elements Creation
 
 ```tsx
 import TSXe from "tsxe";
@@ -63,32 +139,8 @@ document.body.appendChild(
 );
 ```
 
-#### Equivalent
 
-```ts
-const appWrapper = document.createElement("div");
-appWrapper.className = "appWrapper";
-
-const appTitle = document.createElement("h1");
-appTitle.textContent = "My Great App";
-
-const appBody = document.createElement("div");
-appBody.className = "appBody";
-appBody.setAttribute("data-appData", "Hello");
-
-const button = document.createElement("button");
-button.textContent = "Say Hello";
-button.style.color = "red";
-button.addEventListener("click", () => { alert("Hello World"); });
-
-// Append them together
-appBody.append(button);
-appWrapper.append(appTitle, appBody);
-
-document.body.appendChild(appWrapper);
-```
-
-### Custom Component
+### Class Component
 ```tsx
 import TSXe from "tsxe";
 
@@ -105,15 +157,38 @@ class MyComponent extends TSXe.Component<MyComponentProps> {
 document.body.appendChild(<MyComponent title="My Awsome Component"/>);
 ```
 
+### Function Component
+```tsx
+import TSXe from "tsxe";
+
+interface FuncProps {
+    name: string
+}
+function FuncRender(props: TSXe.PropsWithChildren<FuncProps>) {
+    return (
+        <div>
+            <h1>{props.name}</h1>
+            {props.children}
+        </div>
+    )
+}
+
+document.body.appendChild(
+    <FuncRender name="Function Render">
+        <div>Some text here</div>
+    </FuncRender>
+);
+```
+
 ### Fragment
 ```tsx
-import { TSXe, Fragment } from "tsxe";
+import TSXe from "tsxe";
 
 var fragment = (
-    <Fragment>
+    <TSXe.Fragment>
         <label for="password">Password</label>
         <input id="password" type="password" />
-    </Fragment>
+    </TSXe.Fragment>
 );
 
 document.body.appendChild(<div>{fragment}</div>)
@@ -123,13 +198,12 @@ document.body.appendChild(<div>{fragment}</div>)
 
 ### TSXe.render(component: string | Node | Component<any>, container: Node): void
 
-Render Nodes into the container node. It's an alternative to [Node.appendChild](https://developer.mozilla.org/en-US/docs/Web/API/Node/appendChild) / [Element.append](https://developer.mozilla.org/en-US/docs/Web/API/Element/append)
+Render Text / Node / Component into the container node.
 
 
 ### TSXe.Component<T>
 
-Base class of custom component, all custom components should inherit from this class.
-
+Base class of class component, all class components should inherit from this class.
 
 ### static TSXe.Component.createComponent(name: Component<P>, props?: TSXeProperties, ...content: (string | Node Component<any>)[]): Node
 
@@ -139,15 +213,44 @@ Create component with specificed component class. This method is a low level met
 
 Create reference object.
 
+Example:
+```TSX
+import TSXe from "tsxe";
+
+interface WelcomeProps {
+    name: string
+}
+class Welcome extends TSXe.Component<WelcomeProps> {
+    updateName(name: string) {
+        this.node.textContent = `Hello, ${name}`;
+    }
+    render() {
+        return <h1>Hello, {this.props.name}</h1>;
+    }
+}
+
+const welcomeComponent = TSXe.createRef<Welcome>();
+document.body.appendChild(<Welcome name="Boo" ref={welcomeComponent}></Welcome>)
+
+welcomeComponent.current.updateName("Alex");
+```
 
 
 ## Supported Browsers
 
 Modern browsers and Internet Explorer 11 
 
+
+## Roadmap
+
+* And eslint to ensure the code quality
+* Add unit tests
+* Create automatic tools to update JSX content
+
+
 ## License
 
-Copyright (c) 2020 hkm-mo
+Copyright (c) 2020 - 2022 hkm-mo
 
 Licensed under the MIT license.
 
