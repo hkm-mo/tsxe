@@ -196,20 +196,20 @@ document.body.appendChild(<div>{fragment}</div>)
 
 ## APIs
 
-### TSXe.render(component: string | Node | Component<any>, container: Node): void
+### TSXe.render(component: string | Node | Component&lt;any&gt;, container: Node): void
 
 Render Text / Node / Component into the container node.
 
 
-### TSXe.Component<T>
+### TSXe.Component&lt;T&gt;
 
 Base class of class component, all class components should inherit from this class.
 
-### static TSXe.Component.createComponent(name: Component<P>, props?: TSXeProperties, ...content: (string | Node Component<any>)[]): Node
+### static TSXe.Component.createComponent(name: Component&lt;P&gt;, props?: TSXeProperties, ...content: (string | Node Component&lt;any&gt;)[]): Node
 
 Create component with specificed component class. This method is a low level method. 
 
-### TSXe.createRef<T>()
+### TSXe.createRef&lt;T&gt;()
 
 Create reference object.
 
