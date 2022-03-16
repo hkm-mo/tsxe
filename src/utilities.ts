@@ -21,9 +21,7 @@ export function appendChilden(element: Element | DocumentFragment, content: (str
     e.appendChild(docFrag);
 }
 
-// non recursive flatten deep using a stack
-// note that depth control is hard/inefficient as we will need to tag EACH value with its own depth
-// also possible w/o reversing on shift/unshift, but array OPs on the end tends to be faster
+// from: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat
 export function flatten<T>(input: T[]): T[] {
     const stack = [...input];
     const res = [];
