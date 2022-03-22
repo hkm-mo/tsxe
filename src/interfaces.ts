@@ -1,5 +1,4 @@
 import { Component } from "./Component";
-import { RefObjectImplement } from "./RefObjectImplement";
 
 /**
  * @internal You shouldn't need to use this type since you never see these attributes
@@ -16,7 +15,7 @@ export type FunctionComponent<P> = (props: PropsWithChildren<P> | P) => Node
 
 export interface Properties {
     children?: (string | Node | Component<any>)[],
-    ref?: RefObjectImplement<any>,
+    ref?: Ref<any>,
     [key: string]: any
 }
 

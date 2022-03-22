@@ -1,5 +1,4 @@
 import { ClassComponent, FunctionComponent, Properties, RefObject } from "./interfaces";
-import { RefObjectImplement } from "./RefObjectImplement";
 import { Component } from "./Component";
 
 
@@ -130,7 +129,11 @@ export function render(component: string | Node | Component<any>, root: Node) {
     }
 }
 
+/**
+ * Create RefObject to enable atteching `Node` or `Component` object by ref attribute
+ * @returns `TSXe.RefObject`
+ */
 export function createRef<T>(): RefObject<T> {
-    return new RefObjectImplement<T>();
+    return { current: null };
 }
 
