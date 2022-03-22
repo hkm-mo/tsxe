@@ -56,11 +56,7 @@ function renderIntrinsicElement<P extends Properties>(name: string, props: P) {
                         );
                     }
                 } else if (key === "ref") {
-                    if (value instanceof RefObjectImplement) {
-                        value.current = element;
-                    } else if (typeof value === "function") {
-                        value(element);
-                    }
+                    //No OP
                 } else if (key === "dataset")
                     for (const key in value) {
                         if (value.hasOwnProperty(key))
@@ -95,23 +91,32 @@ export function createElement<P extends Properties, T extends Component<P>>(
     type: string | ClassComponent<P, T> | FunctionComponent<P>,
     props: P, ...children: (string | Node | Component<any>)[]) {
     props = props || {};
+    let node:JSX.Element;
+    let component: JSX.Element | Component;
+
     if (typeof type === "string") {
         props.children = children;
-        return renderIntrinsicElement(type, props);
+        component = node = renderIntrinsicElement(type, props);
     } else if (isClassComponentConstructor<P, T>(type)) {
-        let component = Component.createComponent(type, props, ...children);
-        if (props.ref) {
-            props.ref.current = component;
-        }
-        return component.safeRender();
+        component = Component.createComponent(type, props, ...children);
+        node = component.safeRender();
     } else {
         props.children = children;
-        if (props.ref) {
-            return props.ref.current = type(props);
+        component = node = type(props);
+    }
+
+    if (props.ref) {
+        if (typeof props.ref === "function") {
+            setTimeout(props.ref, 0, component);
         } else {
-            return type(props);
+            Object.defineProperty(props.ref, "current", {
+                value: component,
+                writable: false
+            });
         }
     }
+
+    return node;
 }
 
 /**
