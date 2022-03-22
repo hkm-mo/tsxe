@@ -39,7 +39,7 @@ export function flatten<T>(input: T[]): T[] {
 }
 
 const eventAttr = /^on([A-Z][a-zA-Z]*?)(Capture)?$/;
-export function renderIntrinsicElement<P extends Properties>(name: string, props: P) {
+function renderIntrinsicElement<P extends Properties>(name: string, props: P) {
     let element = document.createElement(name);
 
     Object.keys(props)
