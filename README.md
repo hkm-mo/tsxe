@@ -12,7 +12,7 @@ It makes possible to create DOM objects with JSX syntax without React and suppor
 * Supports Visual Studio Code's IntelliSense
 * Supports custom components, both Function Component and Class Component
 * Supports fragments (Short Syntax only available on TypeScript 4.0+)
-* Supports Refs (not support callback Refs)
+* Supports Refs
 * Type checking for HTML tags and attributes
 * Type checking for CSS properties and values (by [CSSType](https://www.npmjs.com/package/csstype))
 
@@ -25,16 +25,24 @@ npm install tsxe
 
 ## Setup
 TSXe supports both TSX and JSX style of syntax. 
-And there needs JavaScript module bundler to pack your code and enable it run in browser, webpack is recommended.
+To enable your code run in browsers, a transpiler and JavaScript module bundler are required.
 
 
 ### TSX: webpack + TypeScript
 
-Update your tsconfig.json:
+
+Install the packages you neeeded
+
+```sh
+npm install --save-dev typescript webpack webpack-cli
+```
+
+Create / Update your tsconfig.json:
 
 ```JSONC
 {
     "compilerOptions": {
+        "module": "CommonJS",
         "jsx": "react",
         "jsxFactory": "TSXe.createElement",
         /* TypeScript 4.0+ Only */
@@ -43,7 +51,9 @@ Update your tsconfig.json:
 }
 ```
 
-Update your webpack.config.js:
+
+Create / Update your webpack.config.js:
+
 ```JavaScript
 const path = require("path");
 
@@ -73,6 +83,7 @@ module.exports = {
     }
 };
 ```
+
 
 ### JSX: webpack + Babel
 
@@ -194,6 +205,7 @@ var fragment = (
 document.body.appendChild(<div>{fragment}</div>)
 ```
 
+
 ## APIs
 
 ### TSXe.render(component: string | Node | Component&lt;any&gt;, container: Node): void
@@ -205,7 +217,7 @@ Render Text / Node / Component into the container node.
 
 Base class of class component, all class components should inherit from this class.
 
-### static TSXe.Component.createComponent(name: Component&lt;P&gt;, props?: TSXeProperties, ...content: (string | Node Component&lt;any&gt;)[]): Node
+### TSXe.Component.createComponent(name: Component&lt;P&gt;, props?: TSXeProperties, ...content: (string | Node Component&lt;any&gt;)[]): Node
 
 Create component with specificed component class. This method is a low level method. 
 
