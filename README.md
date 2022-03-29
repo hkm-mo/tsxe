@@ -181,7 +181,7 @@ function FuncRender(props: TSXe.PropsWithChildren<FuncProps>) {
             <h1>{props.name}</h1>
             {props.children}
         </div>
-    )
+    );
 }
 
 document.body.appendChild(
@@ -202,7 +202,7 @@ var fragment = (
     </TSXe.Fragment>
 );
 
-document.body.appendChild(<div>{fragment}</div>)
+document.body.appendChild(<div>{fragment}</div>);
 ```
 
 
@@ -242,7 +242,7 @@ class Welcome extends TSXe.Component<WelcomeProps> {
 }
 
 const welcomeComponent = TSXe.createRef<Welcome>();
-document.body.appendChild(<Welcome name="Boo" ref={welcomeComponent}></Welcome>)
+document.body.appendChild(<Welcome name="Boo" ref={welcomeComponent}></Welcome>);
 
 welcomeComponent.current.updateName("Alex");
 ```
