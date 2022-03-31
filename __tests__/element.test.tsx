@@ -1,7 +1,12 @@
 import TSXe from "../src";
 
+const helloWorld = "Hello World";
+
+beforeEach(() => {
+    document.body.innerHTML = "";
+});
+
 test("create element", () => {
-    const helloWorld = "Hello World";
     const elmId = "hello";
 
     document.body.appendChild(<div id={elmId}>{helloWorld}</div>);
@@ -49,7 +54,7 @@ test("create Ref func", () => {
 });
 
 test("fragment", () => {
-    document.body.innerHTML = "";
+    // <span/> should not count as <body/>'s child
     document.body.appendChild(
         <>
             <div></div>
