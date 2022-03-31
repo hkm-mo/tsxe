@@ -1,4 +1,4 @@
-import TSXe from "../dist"
+import TSXe from "../src";
 
 test("create element", () => {
     const helloWorld = "Hello World";
