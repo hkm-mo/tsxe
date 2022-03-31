@@ -65,3 +65,32 @@ test("fragment", () => {
 
     expect(document.body.childNodes.length).toBe(3);
 });
+
+test("styles string", () => {
+    const ref = TSXe.createRef<HTMLDivElement>();
+    document.body.appendChild(<div ref={ref} style="margin-left: 10px"></div>);
+
+    expect(ref.current?.style.marginLeft).toBe("10px");
+});
+
+test("styles object", () => {
+    const ref = TSXe.createRef<HTMLDivElement>();
+    document.body.appendChild(<div ref={ref} style={{marginLeft: "10px"}}></div>);
+
+    expect(ref.current?.style.marginLeft).toBe("10px");
+});
+
+
+test("data attributes", () => {
+    const ref = TSXe.createRef<HTMLDivElement>();
+    document.body.appendChild(<div ref={ref} data-test-info={helloWorld}></div>);
+
+    expect(ref.current?.dataset.testInfo).toBe(helloWorld);
+});
+
+test("dataset object", () => {
+    const ref = TSXe.createRef<HTMLDivElement>();
+    document.body.appendChild(<div ref={ref} dataset={{testInfo: helloWorld}}></div>);
+
+    expect(ref.current?.dataset.testInfo).toBe(helloWorld);
+});
