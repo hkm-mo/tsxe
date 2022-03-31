@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+        "target": "ES6",
+        "module": "CommonJS",
+        "outDir": "../dist",
+        "rootDir": "./",
+        "lib": [
+            "ES6",
+            "DOM"
+        ],
+        "strict": true,
+        "allowJs": false,
+        "jsx": "react",
+        "jsxFactory": "TSXe.createElement",
+        "jsxFragmentFactory": "TSXe.Fragment",
+        "sourceMap": true
+    },
+    "include": [
+        "**/*"
+    ]
+}
