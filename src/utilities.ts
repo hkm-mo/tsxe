@@ -58,7 +58,7 @@ function renderIntrinsicElement<P extends Properties>(name: string, props: P) {
                 } else if (key === "dataset")
                     for (const key in value) {
                         if (value.hasOwnProperty(key))
-                            element.setAttribute("data-" + key, value[key]);
+                            element.dataset[key] = value[key];
                     }
                 else if (key === "style" && typeof value === "object")
                     Object.assign(element.style, value);
