@@ -206,6 +206,34 @@ document.body.appendChild(<div>{fragment}</div>);
 ```
 
 
+### Event
+```tsx
+import TSXe from "tsxe";
+
+interface WelcomeProps {
+    name: string
+}
+class Welcome extends TSXe.Component<WelcomeProps> {
+    private count = 0;
+    getTextContent() {
+        return `Hello, ${this.props.name}. You clicked me ${this.count} times.`;
+    }
+    update() {
+        this.node.textContent = this.getTextContent();
+    }
+    addCount() {
+        this.count++;
+        this.update();
+    }
+    render() {
+        return <h1 onClick={this.addCount.bind(this)}>{this.getTextContent()}</h1>;
+    }
+}
+
+document.body.appendChild(<Welcome name="Alex" ref={welcomeComponent}></Welcome>)
+```
+
+
 ## APIs
 
 ### TSXe.render(component: string | Node | Component&lt;any&gt;, container: Node): void
@@ -257,6 +285,8 @@ Modern browsers and Internet Explorer 11
 
 * And eslint to ensure the code quality
 * Add unit tests
+* Add async rendering
+* Add dependency injection
 * Create automatic tools to update JSX content
 * Create command line tools to create new projects
 
