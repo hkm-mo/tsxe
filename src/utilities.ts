@@ -55,8 +55,6 @@ function renderIntrinsicElement<P extends Properties>(name: string, props: P) {
                             (key != "onGotPointerCapture" && key != "onLostPointerCapture") ? Boolean(match[2]) : false
                         );
                     }
-                } else if (key === "ref") {
-                    //No OP
                 } else if (key === "dataset")
                     for (const key in value) {
                         if (value.hasOwnProperty(key))
@@ -72,7 +70,7 @@ function renderIntrinsicElement<P extends Properties>(name: string, props: P) {
                 }
                 else if (key === "children")
                     appendChilden(element, flatten(value));
-                else
+                else if (key !== "ref") // ref property should be handled by createElement()
                     element.setAttribute(key, value as string);
             }
         });
