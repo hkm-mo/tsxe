@@ -38,6 +38,20 @@ export function flatten<T>(input: T[]): T[] {
     return res.reverse();
 }
 
+const objectAssign = Object.assign ?
+    Object.assign :
+    (target: any, source: any) => {
+        // Assume target always is an object
+        if (typeof source === "object" && source !== null) {
+            for (const key in source) {
+                if (Object.prototype.hasOwnProperty.call(source, key))
+                    target[key] = source[key];
+            }
+        }
+
+        return target;
+    };
+
 const eventAttr = /^on([A-Z][a-zA-Z]*?)(Capture)?$/;
 function renderIntrinsicElement<P extends Properties>(name: string, props: P) {
     let element = document.createElement(name);
@@ -56,12 +70,9 @@ function renderIntrinsicElement<P extends Properties>(name: string, props: P) {
                         );
                     }
                 } else if (key === "dataset")
-                    for (const key in value) {
-                        if (value.hasOwnProperty(key))
-                            element.dataset[key] = value[key];
-                    }
+                    objectAssign(element.dataset, value);
                 else if (key === "style" && typeof value === "object")
-                    Object.assign(element.style, value);
+                    objectAssign(element.style, value);
                 else if (key === "className")
                     element.className = value;
                 else if (typeof value === "boolean") {
@@ -89,7 +100,7 @@ export function createElement<P extends Properties, T extends Component<P>>(
     type: string | ClassComponent<P, T> | FunctionComponent<P>,
     props: P, ...children: (string | Node | Component<any>)[]) {
     props = props || {};
-    let node:JSX.Element;
+    let node: JSX.Element;
     let component: JSX.Element | Component;
 
     if (typeof type === "string") {
