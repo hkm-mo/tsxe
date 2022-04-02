@@ -26,13 +26,15 @@
         "url": "git+https://github.com/hkm-mo/tsxe.git"
     },
     "keywords": [
+        "front-end",
         "tsx",
         "jsx",
         "Element",
         "without React",
         "template",
         "HTML",
-        "DOM"
+        "DOM",
+        "web"
     ],
     "author": "hkm-mo",
     "license": "MIT",
