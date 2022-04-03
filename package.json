@@ -1,6 +1,6 @@
 {
     "name": "tsxe",
-    "version": "2.1.0",
+    "version": "2.1.2",
     "description": "Create HTML elements by TSX/JSX syntax without React.",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
@@ -29,13 +29,15 @@
         "url": "git+https://github.com/hkm-mo/tsxe.git"
     },
     "keywords": [
+        "front-end",
         "tsx",
         "jsx",
         "Element",
         "without React",
         "template",
         "HTML",
-        "DOM"
+        "DOM",
+        "web"
     ],
     "author": "hkm-mo",
     "license": "MIT",
