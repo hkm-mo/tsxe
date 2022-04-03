@@ -30,8 +30,8 @@ export function flatten<T>(input: T[]): T[] {
         if (Array.isArray(next)) {
             // push back array items, won't modify the original input
             stack.push(...next);
-        } else if (next) {
-            res.push(next);
+        } else {
+            res.push(next as T);
         }
     }
     // reverse to restore input order
@@ -138,7 +138,8 @@ export function render(component: string | Node | Component<any>, root: Node) {
         root.appendChild(component);
     } else if (Component.isComponent(component)) {
         root.appendChild(component.safeRender());
-    } else {
+    } else if (component !== null && (typeof component === "string" || typeof component === "number")) {
+        // only string and number can be rendered.
         root.appendChild(document.createTextNode(String(component)));
     }
 }
