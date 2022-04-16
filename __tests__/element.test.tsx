@@ -7,14 +7,11 @@ beforeEach(() => {
 });
 
 test("create element", () => {
-    const elmId = "hello";
+    const content = ["Hello"," ", "World"];
 
-    document.body.appendChild(<div id={elmId}>{helloWorld}</div>);
+    document.body.appendChild(<div>{content}</div>);
 
-    const elm = document.getElementById(elmId);
-    
-    expect(elm).not.toBeNull();
-    expect(elm?.textContent).toBe(helloWorld);
+    expect(document.body.innerHTML).toMatchSnapshot();
 });
 
 test("nested array", () => {
@@ -23,11 +20,9 @@ test("nested array", () => {
         [["World", [<span>!</span>]]]
     ];
 
-    document.body.appendChild(<div id="nestedArray">{children}</div>);
+    document.body.appendChild(<div>{children}</div>);
 
-    const elm = document.getElementById("nestedArray");
-
-    expect(elm?.innerHTML).toBe("Hello World<span>!</span>");
+    expect(document.body.innerHTML).toMatchSnapshot();
 });
 
 
@@ -63,21 +58,21 @@ test("fragment", () => {
         </>
     );
 
-    expect(document.body.childNodes.length).toBe(3);
+    expect(document.body.innerHTML).toMatchSnapshot();
 });
 
 test("styles string", () => {
     const ref = TSXe.createRef<HTMLDivElement>();
     document.body.appendChild(<div ref={ref} style="margin-left: 10px"></div>);
 
-    expect(ref.current?.style.marginLeft).toBe("10px");
+    expect(document.body.innerHTML).toMatchSnapshot();
 });
 
 test("styles object", () => {
     const ref = TSXe.createRef<HTMLDivElement>();
     document.body.appendChild(<div ref={ref} style={{marginLeft: "10px"}}></div>);
 
-    expect(ref.current?.style.marginLeft).toBe("10px");
+    expect(document.body.innerHTML).toMatchSnapshot();
 });
 
 

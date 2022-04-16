@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`create element 1`] = `"<div>Hello World</div>"`;
+
+exports[`fragment 1`] = `"<div></div><div></div><div><span></span></div>"`;
+
+exports[`nested array 1`] = `"<div>Hello World<span>!</span></div>"`;
+
+exports[`styles object 1`] = `"<div style=\\"margin-left: 10px;\\"></div>"`;
+
+exports[`styles string 1`] = `"<div style=\\"margin-left: 10px\\"></div>"`;
