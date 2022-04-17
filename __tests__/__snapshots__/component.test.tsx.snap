@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`class component class component creation 1`] = `"<div><div>Hello World</div></div>"`;
+
+exports[`class component class component manual creation 1`] = `"<div><div>Test</div><div></div></div>"`;
+
+exports[`class component class component ref 1`] = `"<div><div>Hello World</div></div>"`;
+
+exports[`function component function component creation 1`] = `"<div><div>Hello World</div></div>"`;
