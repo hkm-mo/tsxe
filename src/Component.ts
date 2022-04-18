@@ -1,5 +1,7 @@
 import { ClassComponent, Properties } from "./interfaces";
 
+const componentMap = new WeakMap();
+
 interface ComponentProps {
 }
 
@@ -31,6 +33,7 @@ export abstract class Component<T = ComponentProps> {
     public safeRender(): Node {
         if (!this._node) {
             this._node = this.render();
+            componentMap.set(this._node, this);
         }
 
         return this._node;
@@ -59,7 +62,7 @@ export abstract class Component<T = ComponentProps> {
      * @returns An instance of TSXe.Component or null
      */
     public static getComponentFromNode<C extends Component = Component<any>>(node: Node): C {
-        return (node as TSXeNode)?.___tsxe_component as C || null;
+        return componentMap.get(node);
     }
 
     /**
