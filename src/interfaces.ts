@@ -21,10 +21,6 @@ export interface Properties {
 
 export type PropsWithChildren<P> = P & Properties;
 
-export interface TSXeNode extends JSX.Element {
-    ___tsxe_component: Component<any>
-}
-
 export interface RefObject<T> {
     readonly current: T | null;
 }

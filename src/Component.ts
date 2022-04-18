@@ -1,4 +1,4 @@
-import { ClassComponent, Properties, TSXeNode } from "./interfaces";
+import { ClassComponent, Properties } from "./interfaces";
 
 interface ComponentProps {
 }
@@ -7,10 +7,9 @@ interface ComponentProps {
  * An abstract class for building custom component.
  */
 export abstract class Component<T = ComponentProps> {
-    private readonly ___tsxe_component = true;
 
-    private _node: TSXeNode | null = null;
-    public get node(): TSXeNode | null {
+    private _node: JSX.Element | null = null;
+    public get node(): JSX.Element | null {
         return this._node;
     }
 
@@ -31,8 +30,7 @@ export abstract class Component<T = ComponentProps> {
      */
     public safeRender(): Node {
         if (!this._node) {
-            this._node = this.render() as TSXeNode;
-            this._node.___tsxe_component = this;
+            this._node = this.render();
         }
 
         return this._node;
@@ -51,8 +49,8 @@ export abstract class Component<T = ComponentProps> {
      * @param obj The value to be checked.
      * @returns `true` if the value is a `TSXe.Component`; otherwise, `false`.
      */
-    public static isComponent(obj: any): obj is Component<any> {
-        return Boolean(obj && obj.___tsxe_component && obj.___tsxe_component === true);
+    public static isComponent<C extends Component = Component<any>>(obj: any): obj is C {
+        return Boolean(obj && obj instanceof Component);
     }
 
     /**
