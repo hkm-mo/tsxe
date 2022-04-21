@@ -1,7 +1,7 @@
 
 export { Fragment as Fragment } from "./Fragment";
 export { RefObject, FunctionComponent,
-    ClassComponent, PropsWithChildren } from "./interfaces"
+    ClassComponent, PropsWithChildren } from "./interfaces";
 export { Component } from "./Component";
 export { createElement, createRef, render } from "./utilities";
 
@@ -15,4 +15,4 @@ export const TSXeComponent = Component;
 /**
  * @deprecated To align with React, please use `JSX.Element` instead
  */
- export type TSXeNode = JSX.Element;
+export type TSXeNode = JSX.Element;
