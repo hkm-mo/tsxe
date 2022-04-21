@@ -101,7 +101,7 @@ export abstract class Component<T = ComponentProps> {
         const _props = props || ({} as P);
         _props.children = content;
         
-        let component = new name(_props);
+        const component = new name(_props);
         component.safeRender();
         return component;
     }

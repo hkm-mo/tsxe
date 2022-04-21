@@ -10,8 +10,8 @@ function isClassComponentConstructor<P, T extends Component<P>>(obj: any): obj i
 }
 
 export function appendChilden(element: Element | DocumentFragment, content: (string | Node | Component<any>)[]) {
-    let e = element as Node;
-    let docFrag = document.createDocumentFragment();
+    const e = element as Node;
+    const docFrag = document.createDocumentFragment();
 
     content.forEach((argItem) => {
         render(argItem, docFrag);
@@ -54,14 +54,14 @@ const objectAssign = Object.assign ?
 
 const eventAttr = /^on([A-Z][a-zA-Z]*?)(Capture)?$/;
 function renderIntrinsicElement<P extends Properties>(name: string, props: P) {
-    let element = document.createElement(name);
+    const element = document.createElement(name);
 
     Object.keys(props)
         .forEach(key => {
             const value = props[key];
             if (typeof value !== "undefined") {
                 if (typeof (value) === "function") {
-                    let match = eventAttr.exec(key);
+                    const match = eventAttr.exec(key);
                     if (match && match[1]) {
                         element.addEventListener(
                             match[1].toLowerCase(),

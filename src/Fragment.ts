@@ -6,7 +6,7 @@ import { appendChilden, flatten } from "./utilities";
  */
 export class Fragment extends Component<any> {
     render(): Node {
-        let fragment = document.createDocumentFragment();
+        const fragment = document.createDocumentFragment();
 
         if (this.props.children)
             appendChilden(fragment, flatten(this.props.children));
