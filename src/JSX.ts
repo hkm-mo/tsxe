@@ -122,7 +122,7 @@ declare global {
              */
             "base": DetailedHTMLProps<BaseHTMLAttributes<HTMLBaseElement>, HTMLBaseElement>;
             /**
-             * The HTML Bidirectional Isolate element (&lt;bdi&gt;)  tells the browser's bidirectional algorithm to
+             * The HTML Bidirectional Isolate element (&lt;bdi&gt;) tells the browser's bidirectional algorithm to
              * treat the text it contains in isolation from its surrounding text. It's particularly useful when a
              * website dynamically inserts some text and doesn't know the directionality of the text being
              * inserted.
@@ -144,7 +144,7 @@ declare global {
              */
             "blockquote": DetailedHTMLProps<QuoteHTMLAttributes<HTMLQuoteElement>, HTMLQuoteElement>;
             /**
-             * The HTML &lt;body&gt; Element represents the content of an HTML document. There can be only one
+             * The HTML &lt;body&gt; Element represents the content of an HTML document. There can be only one
              * &lt;body&gt; element in a document.
              * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/body
              */
@@ -200,7 +200,7 @@ declare global {
              */
             "colgroup": DetailedHTMLProps<HTMLAttributes<HTMLTableColElement>, HTMLTableColElement>;
             /**
-             * The HTML &lt;data&gt; element links a given piece of content with a machine-readable translation. If
+             * The HTML &lt;data&gt; element links a given piece of content with a machine-readable translation. If
              * the content is time- or date-related, the &lt;time&gt; element must be used.
              * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/data
              */
@@ -393,10 +393,10 @@ declare global {
              */
             "html": DetailedHTMLProps<HtmlHTMLAttributes<HTMLHtmlElement>, HTMLHtmlElement>;
             /**
-             * The HTML Idiomatic Text element (&lt;i&gt;) represents a range of text that is set off from the
+             * The HTML Idiomatic Text element (&lt;i&gt;) represents a range of text that is set off from the
              * normal text for some reason, such as idiomatic text, technical terms, taxonomical designations, among
-             * others. Historically, these have been presented using italicized type, which is the original source
-             * of the &lt;i&gt; naming of this element.
+             * others. Historically, these have been presented using italicized type, which is the original source
+             * of the &lt;i&gt; naming of this element.
              * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/i
              */
             "i": DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>;
@@ -532,7 +532,7 @@ declare global {
             "optgroup": DetailedHTMLProps<OptgroupHTMLAttributes<HTMLOptGroupElement>, HTMLOptGroupElement>;
             /**
              * The HTML &lt;option&gt; element is used to define an item contained in a &lt;select&gt;, an
-             * &lt;optgroup&gt;, or a &lt;datalist&gt; element. As such, &lt;option&gt; can represent menu items in
+             * &lt;optgroup&gt;, or a &lt;datalist&gt; element. As such, &lt;option&gt; can represent menu items in
              * popups and other lists of items in an HTML document.
              * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option
              */
@@ -557,7 +557,7 @@ declare global {
             "param": DetailedHTMLProps<ParamHTMLAttributes<HTMLParamElement>, HTMLParamElement>;
             /**
              * The HTML &lt;picture&gt; element contains zero or more &lt;source&gt; elements and one &lt;img&gt;
-             * element to offer alternative versions of an image for different display/device scenarios. 
+             * element to offer alternative versions of an image for different display/device scenarios. 
              * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/picture
              */
             "picture": DetailedHTMLProps<HTMLAttributes<HTMLPictureElement>, HTMLPictureElement>;
@@ -649,7 +649,7 @@ declare global {
              * &lt;audio&gt; element, or the &lt;video&gt; element. It is an empty element, meaning that it has no
              * content and does not have a closing tag. It is commonly used to offer the same media content in
              * multiple file formats in order to provide compatibility with a broad range of browsers given their
-             * differing support for image file formats and media file formats.
+             * differing support for image file formats and media file formats.
              * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/source
              */
             "source": DetailedHTMLProps<SourceHTMLAttributes<HTMLSourceElement>, HTMLSourceElement>;
@@ -767,7 +767,7 @@ declare global {
              * The HTML &lt;track&gt; element is used as a child of the media elements &lt;audio&gt; and
              * &lt;video&gt;. It lets you specify timed text tracks (or time-based data), for example to
              * automatically handle subtitles. The tracks are formatted in WebVTT format (.vtt files) — Web Video
-             * Text Tracks or Timed Text Markup Language (TTML).
+             * Text Tracks or Timed Text Markup Language (TTML).
              * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/track
              */
             "track": DetailedHTMLProps<TrackHTMLAttributes<HTMLTrackElement>, HTMLTrackElement>;
