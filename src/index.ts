@@ -5,7 +5,7 @@
  * @see {@link https://github.com/hkm-mo/tsxe|GitHub}
  * @license MIT
  */
-import * as TSXeObj from "./TSXe"
+import * as TSXeObj from "./TSXe";
 export * from "./TSXe";
 export default TSXeObj;
 
