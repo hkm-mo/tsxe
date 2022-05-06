@@ -4,7 +4,7 @@ import { appendChilden, flatten } from "./utilities";
 /**
  * A class for building HTML Fragment.
  */
-export class Fragment extends Component<any> {
+export class Fragment extends Component {
     render(): Node {
         const fragment = document.createDocumentFragment();
 
