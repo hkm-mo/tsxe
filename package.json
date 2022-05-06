@@ -11,7 +11,10 @@
     ],
     "devDependencies": {
         "@types/jest": "^27.4.1",
+        "@typescript-eslint/eslint-plugin": "^5.20.0",
+        "@typescript-eslint/parser": "^5.20.0",
         "csstype": "^3.0.9",
+        "eslint": "^8.13.0",
         "jest": "^27.5.1",
         "ts-jest": "^27.1.4",
         "ts-loader": "^9.2.6",
@@ -22,7 +25,8 @@
     "scripts": {
         "build:dev": "webpack --mode=development",
         "build:prod": "webpack --mode=production",
-        "test": "jest --coverage"
+        "test": "jest --coverage",
+        "lint": "eslint src/*.ts"
     },
     "repository": {
         "type": "git",
