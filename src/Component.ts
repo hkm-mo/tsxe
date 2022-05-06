@@ -52,7 +52,7 @@ export abstract class Component<T = ComponentProps> {
      * @param obj The value to be checked.
      * @returns `true` if the value is a `TSXe.Component`; otherwise, `false`.
      */
-    public static isComponent<C extends Component = Component<any>>(obj: any): obj is C {
+    public static isComponent<C extends Component>(obj: any): obj is C {
         return Boolean(obj && obj instanceof Component);
     }
 
@@ -61,7 +61,7 @@ export abstract class Component<T = ComponentProps> {
      * @param node A node 
      * @returns An instance of TSXe.Component or null
      */
-    public static getComponentFromNode<C extends Component = Component<any>>(node: Node): C {
+    public static getComponentFromNode<C extends Component>(node: Node): C {
         return componentMap.get(node);
     }
 
