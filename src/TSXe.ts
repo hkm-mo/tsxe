@@ -1,5 +1,5 @@
 
-export { Fragment as Fragment } from "./Fragment";
+export { Fragment } from "./Fragment";
 export { RefObject, FunctionComponent,
     ClassComponent, PropsWithChildren } from "./interfaces";
 export { Component } from "./Component";
