@@ -2,13 +2,10 @@ import { ClassComponent, Properties } from "./interfaces";
 
 const componentMap = new WeakMap();
 
-interface ComponentProps {
-}
-
 /**
  * An abstract class for building custom component.
  */
-export abstract class Component<T = ComponentProps> {
+export abstract class Component<T = {}> {
 
     private _node: JSX.Element | null = null;
     public get node(): JSX.Element | null {
