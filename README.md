@@ -19,7 +19,7 @@ It makes possible to create DOM objects with JSX syntax without React and suppor
 ## Install
 
 ```sh
-npm install tsxe
+npm install tsxe csstype
 ```
 
 
