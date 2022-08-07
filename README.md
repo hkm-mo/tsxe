@@ -34,7 +34,7 @@ To enable your code run in browsers, a transpiler and JavaScript module bundler 
 Install the packages you neeeded
 
 ```sh
-npm install --save-dev typescript webpack webpack-cli
+npm install --save-dev typescript ts-loader webpack webpack-cli
 ```
 
 Create / Update your tsconfig.json:
